@@ -1,11 +1,11 @@
-var gl;
+let gl;
 
 // numCirclePoints er fjöldi punkta á hringnum
 // Heildarfjöldi punkta er tveimur meiri (miðpunktur + fyrsti punktur kemur tvisvar)
 let numCirclePoints;
 const radius = 0.5;
 const center = vec2(0, 0);
-var points = [];
+let points = [];
 
 window.onload = function init()
 {
@@ -66,12 +66,11 @@ function render()
 	// Draw circle using Triangle Fan
 	gl.drawArrays(gl.TRIANGLE_FAN,0,numCirclePoints+2);
 
-	window.requestAnimFrame(render);
+	//window.requestAnimFrame(render);//óþarfi
 }
 
-function rerender(sli)
+function rerender()
 {
 	"use strict";
-	console.log(numCirclePoints);
-	numCirclePoints = parseInt(sli.value);
+	window.onload();
 }
