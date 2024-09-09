@@ -27,7 +27,17 @@ const hs = 5;//hámarks skotafjöldi(ekki breyta þessu)
 const sl = 0.030;//skotalengd
 const sr = 0.010;//skotaradíus
 const sh = 0.025;//skothraði
-const gy = -1.2;//geymslu-y fyrir ónotuð skot (af hverju eru þau "í gangi" ef gy er ákveðið stórt? -0.94 til -0.96)
+const gy = -1.2;//geymslu-y fyrir ónotuð skot(ef breytt, verið viss um að námundunin niður í float sé niður á við)
+const nf = 5;//hámarks fuglafjöldi(ekki breyta þessu)
+const lf = 0.1;//lengd fugla
+const hf = 0.1;//hæð fugla(nota með - því fyrsti punktur er efst til vinstri)
+const gxf = 1.1+lf;//geymslu-x fyrir ónotaða fugla(geymið hægra megin)
+const fub = 0.01;//fugla-útaf-buffer
+const wdc = -0.2;//flug-glugga færslu fasti
+const wdm = 1;//flug-glugga stærðar margfaldari
+const dcc = 0.5;//flugáttar líkur(verður að vera plústala milli 0 og 1)
+const mfh = 0.01;//minnsti flughraði(verður að vera plústala)
+const fhd = 30;//flughraða-deilir(verður að vera plústala)
 //--------
 const pty = 1-tb;//prikatoppur-y
 const pby = 1-tb-pl;//prikabotn-y
@@ -40,9 +50,14 @@ const lxb = rb-1;//lægsta x byssu(mest til vinstri)
 const hxb = 1-rb;//hæsta x byssu(mest til hægri)
 const oob = 1+sl;//skot er "útaf" í þessarri hæð
 const sby = bty-sl;//skotabotn-y þegar skot birtist í byssu
+const gxe = gxf+lf;//geymslu-x-endir fugls
+const fbh = 1+lf;//fugl byrjar flug hér
+const fob = 1+lf+fub;//fugl er "útaf" hér
+const fh = new Float32Array(nf);//fuglahraði
 //--------
 const divfac = myCanvas.width/2;
 const SIN = BIN*2+6;//skota-index í útfletið myVertices
+const FIN = SIN+hs*6;//Fugla-index í útfletið myVertices
 //--------
 if(lxb>hxb)
 {
@@ -61,7 +76,12 @@ const myVertices = flatten([
 	vec2(0,gy),vec2(-sr,gy-sl),vec2(sr,gy-sl),//annað skot
 	vec2(0,gy),vec2(-sr,gy-sl),vec2(sr,gy-sl),//þriðja skot
 	vec2(0,gy),vec2(-sr,gy-sl),vec2(sr,gy-sl),//fjórða skot
-	vec2(0,gy),vec2(-sr,gy-sl),vec2(sr,gy-sl) //fimmta skot
+	vec2(0,gy),vec2(-sr,gy-sl),vec2(sr,gy-sl),//fimmta skot
+	vec2(gxf,0),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,-hf),//Fugl 1
+	vec2(gxf,0),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,-hf),//Fugl 2
+	vec2(gxf,0),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,-hf),//Fugl 3
+	vec2(gxf,0),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,-hf),//Fugl 4
+	vec2(gxf,0),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,0),vec2(gxf,-hf),vec2(gxe,-hf) //Fugl 5
 ]);
 gl.bufferData(gl.ARRAY_BUFFER,myVertices,gl.STATIC_DRAW);//getur endað á gl.STATIC_DRAW eða gl.DYNAMIC_DRAW, hver er munurinn?
 /*                            ^
@@ -129,7 +149,53 @@ function færaSkot()
 		}
 	}
 }
-
+function færaFugla()
+{
+	for(let i=0,a,t;i<nf;i++)
+	{
+		a = FIN+i*12;//hver fugl hefur 12 punkta
+		if(myVertices[a]>=gxf)//x-gildi gefur til kynna að það sé ónotað; ef námundunarvilla, ætti að fljúga hingað á 1 ramma
+		{continue;}
+		else//fugl er á flugi
+		{
+			t = myVertices[a]+fh[i];
+			if(Math.abs(t)>=fob)//fugl er "útaf"
+			{//setja hann í geymslu
+				myVertices[a] = myVertices[a+4] = myVertices[a+8] = gxf;
+				myVertices[a+2] = myVertices[a+6] = myVertices[a+10] = gxe;
+				fh[i] = 0;
+			}
+			else//flýgur eitt skref
+			{
+				myVertices[a]+=fh[i];
+				myVertices[a+2]+=fh[i];
+				myVertices[a+4]+=fh[i];
+				myVertices[a+6]+=fh[i];
+				myVertices[a+8]+=fh[i];
+				myVertices[a+10]+=fh[i];
+			}
+		}
+	}
+}
+function startaFugli()
+{
+	for(let i=0,a;i<nf;i++)
+	{
+		a = FIN+i*12;
+		if(myVertices[a]>=gxf)//x-gildi gefur til kynna að það sé ónotað
+		{//setja þennann fugl af stað
+			const h = Math.random()*wdm+wdc;
+			const d = (Math.random()<dcc)?1:-1;
+			const t = fbh*d;
+			myVertices[a] = myVertices[a+4] = myVertices[a+8] = t;
+			myVertices[a+1] = myVertices[a+3] = myVertices[a+7] = h;
+			myVertices[a+2] = myVertices[a+6] = myVertices[a+10] = t+lf;
+			myVertices[a+5] = myVertices[a+9] = myVertices[a+11] = h-hf;
+			fh[i] = -d*(Math.random()/fhd+mfh);
+			return;//bara einn fugl í einu
+		}
+	}
+}
 let renderLoop = true;
 render();
 
@@ -153,6 +219,7 @@ function prerender()
 {
 	//placeGun();
 	færaSkot();
+	færaFugla();
 	gl.bufferSubData(gl.ARRAY_BUFFER,BIN<<3,myChangables);//viðfang 2 er hrár bætafjöldi
 }
 
@@ -174,7 +241,8 @@ window.onkeydown = (e) => {
 	if(e.keyCode==32 && e.repeat==false)
 	{
 		prikafjöldi = (prikafjöldi+1)%6
-		sjáUmPrik();//þessar 2 línur eiga ekki heima hér, bara fyrir prófanir
+		sjáUmPrik();
+		startaFugli();//þessar 3 línur eiga ekki heima hér, bara fyrir prófanir
 		skjóta();
 	}
 };
