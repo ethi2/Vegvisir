@@ -39,7 +39,7 @@ const dcc = 0.5;//flugáttar líkur
 const mfh = 0.01;//minnsti flughraði
 const fhd = 50;//flughraða-deilir
 let birdLaunchTimer = 100;
-const birdRefreshTime = 100;
+const birdRefreshTime = 35;
 //--------
 const pty = 1-tb;//prikatoppur-y
 const pby = 1-tb-pl;//prikabotn-y
