@@ -123,7 +123,7 @@ function colorCube()
 const klst = 0.1/12;//gert ráð fyrir að þetta sé 12 tíma veggklukka(en ekki 24)
 const mins = 0.1;//(6(sek°)/60)
 const seks = 6;//(360° / 60 sek í hring)
-const degToRad = Math.PI/180;//turned out to not be needed
+const degToRad = Math.PI/180;
 
 function render()
 {
