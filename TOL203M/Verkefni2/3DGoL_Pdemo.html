@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+attribute vec4 vColor;
+varying vec4 fColor;
+uniform mat4 transform;
+void main()
+{
+	fColor = vColor;
+	gl_Position = transform * vPosition;
+}
+</script>
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 fColor;
+void main()
+{
+	gl_FragColor = fColor;
+}
+</script>
+<script type="text/javascript" src="../webgl-utils.js"></script>
+<script type="text/javascript" src="../initShaders.js"></script>
+<script type="text/javascript" src="../MV.js"></script>
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas><br>
+<input type=checkbox onchange=viewChanger(0) id="cb0">Shift Z -2.0<br>
+<input type=checkbox onchange=viewChanger(1) id="cb1">Perspective<br>
+<input type=checkbox onchange=viewChanger(2) id="cb2" checked>Scale down by 1/Sqrt(3)<br>
+<input type=button value="next generation" onclick=manualstep(this)><span></span><br>
+Click+hold to rotate, RMB+hold to tilt, MMB/Wheel to reset
+<script type="text/javascript" src="3DGoL_Pdemo.js"></script>
+</body>
+</html>
