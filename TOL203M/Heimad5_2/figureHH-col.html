@@ -1,0 +1,59 @@
+<html>
+<head>
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute  vec4 vPosition;
+attribute vec4 vColor;
+varying vec4 fColor;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+void main()
+{
+	fColor = vColor;
+	gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 fColor;
+void main()
+{
+	gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../webgl-utils.js"></script>
+<script type="text/javascript" src="../initShaders.js"></script>
+<script type="text/javascript" src="../MV.js"></script>
+<script type="text/javascript" src="figureHH-col.js"></script>
+<style>
+input
+{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+</style>
+</head>
+<body>
+Velja virkan líkamshluta með hnöppum, hreyfa hann með upp/niður örvum.
+<table style="width:100%"><tbody><tr>
+	<td><canvas id="gl-canvas" width="600" height="600"></canvas></td>
+	<td>
+		<input type=button value="Torso angle" id="btnTorso" onclick=bodypartSelector(0)><br>
+		<input type=button value="Head2 angle" id="btnHead2" onclick=bodypartSelector(10)><br>
+		<input type=button value="Head1 angle" id="btnHead1" onclick=bodypartSelector(1)><br>
+	<!--	<input type=button value="Left upper arm angle" id="btnLeftUpperArm" onclick=bodypartSelector(2)><br> -->
+		<input type=button value="Left lower arm angle" id="btnLeftLowerArm" onclick=bodypartSelector(3)><br>
+	<!--	<input type=button value="Right upper arm angle" id="btnRightUpperArm" onclick=bodypartSelector(4)><br> -->
+		<input type=button value="Right lower arm angle" id="btnRightLowerArm" onclick=bodypartSelector(5)><br>
+	<!--	<input type=button value="Left upper leg angle" id="btnLeftUpperLeg" onclick=bodypartSelector(6)><br>
+		<input type=button value="Left lower leg angle" id="btnLeftLowerLeg" onclick=bodypartSelector(7)><br>
+		<input type=button value="Right upper leg angle" id="btnRightUpperLeg" onclick=bodypartSelector(8)><br>
+		<input type=button value="Right lower leg angle" id="btnRightLowerLeg" onclick=bodypartSelector(9)><br> -->
+		Upper limb flail angle:<input type=range min=10 max=90 value=60 id="Usl" oninput=slideSlider(this,0)><br>
+		Lower limb flail angle:<input type=range min=0 max=89 value=60 id="Lsl" oninput=slideSlider(this,1)><br>
+		Current angle: <div id="currAngle"> </div>
+	</td>
+</tr></tbody></table>
+</body>
+</html>
