@@ -17,8 +17,8 @@ void main()
 	if(lightPosition.w == 0.0) L = normalize(lightPosition.xyz);
 	else L = normalize(lightPosition.xyz - pos);
 	E = -normalize(pos);
-	//N = normalize(myNormalMatrix*vNormal.xyz);//Það varð algjört fail að reyna að koma þessum breytum hingað úr JS
-	N = vec3(0.1,0.2,0.3);//Þetta er plástur til að restin hafi einhverja virkni
+	N = normalize(myNormalMatrix*vNormal.xyz);
+	//N = vec3(0.1,0.2,0.3);//Þetta er plástur til að restin hafi einhverja virkni,þarf ekki lengur
 	fColor = vColor;//er ekki notað lengur í fragment-shader
 	gl_Position = rotation * vPosition;
 }
@@ -52,9 +52,21 @@ void main()
 <script type="text/javascript" src="../webgl-utils.js"></script>
 <script type="text/javascript" src="../initShaders.js"></script>
 <script type="text/javascript" src="../MV.js"></script>
-<script type="text/javascript" src="BILLY_patched.js"></script>
+<style>
+fieldset
+{
+	display: inline-block;
+}
+</style>
 </head>
 <body>
-<canvas id="gl-canvas" width="700" height="700"></canvas>
+<canvas id="gl-canvas" width="700" height="700"></canvas><br>
+shininess:<input type=range min=1 max=600 value=550 oninput=rinp(this) id="rin"><span></span><br>
+<fieldset><legend>light position</legend>
+X:<input type=range min="-1" max=1 step="0.1" value=1 oninput=lp(this,0) id="lpSx"><span></span><br>
+Y:<input type=range min="-1" max=1 step="0.1" value=1 oninput=lp(this,1) id="lpSy"><span></span><br>
+Z:<input type=range min="-1" max=1 step="0.1" value=1 oninput=lp(this,2) id="lpSz"><span></span>
+</fieldset>
+<script type="text/javascript" src="BILLY_patched.js"></script>
 </body>
 </html>

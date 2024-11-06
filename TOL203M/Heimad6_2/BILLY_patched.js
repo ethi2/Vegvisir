@@ -14,8 +14,9 @@ var origX;
 var origY;
 
 var matrixLoc;
-
 var myNormalMatrixLoc = 0;
+
+let lpLoc;
 const lightPosition = flatten(vec4(1.0,1.0,1.0,0.0));
 const lightAmbient =     vec4(0.2,0.2,0.2,1.0);
 const lightDiffuse =     vec4(1.0,1.0,1.0,1.0);
@@ -23,12 +24,32 @@ const lightSpecular =    vec4(1.0,1.0,1.0,1.0);
 const materialAmbient =  vec4(1.0,0.0,1.0,1.0);
 const materialDiffuse =  vec4(1.0,0.8,0.0,1.0);
 const materialSpecular = vec4(1.0,1.0,1.0,1.0);
-const materialShininess = 550.0;
+let materialShininess, MSloc;
 
 const ambientProduct = flatten(mult(lightAmbient, materialAmbient));
 const diffuseProduct = flatten(mult(lightDiffuse, materialDiffuse));
 const specularProduct = flatten(mult(lightSpecular, materialSpecular));
 
+function rinp(S)
+{
+	if(MSloc)
+	{
+		const temp = parseFloat(S.value);
+		materialShininess = temp;
+		S.nextSibling.innerText = temp;
+		gl.uniform1f(MSloc,materialShininess);
+	}
+}
+function lp(S,p)
+{
+	if(lpLoc)
+	{
+		const temp = parseFloat(S.value);
+		lightPosition[p] = temp;
+		S.nextSibling.innerText = temp;
+		gl.uniform4fv(lpLoc,lightPosition);
+	}
+}
 window.onload = function init()
 {
 	"use strict";
@@ -64,7 +85,7 @@ window.onload = function init()
 	gl.bufferData(gl.ARRAY_BUFFER,flatten(points),gl.STATIC_DRAW);
 
 	var vPosition = gl.getAttribLocation(program,"vPosition");
-	gl.vertexAttribPointer(vPosition,3,gl.FLOAT,false,0,0);//PhongCube breytir þessu frá 3 í 4
+	gl.vertexAttribPointer(vPosition,4,gl.FLOAT,false,0,0);//PhongCube breytir þessu frá 3 í 4
 	gl.enableVertexAttribArray(vPosition);
 
 // viðbót frá PhongCube
@@ -72,18 +93,27 @@ window.onload = function init()
 	gl.bindBuffer(gl.ARRAY_BUFFER,nBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER,flatten(normalsArray),gl.STATIC_DRAW);
 //
-	var vNormal = gl.getAttribLocation(program,"vNormal");//að bæta þessu við gefur viðvörun, ekki lengur eftir að það var fært upp í HTML skránni
-//	gl.vertexAttribPointer(vNormal,4,gl.FLOAT,false,0,0);
-//	gl.enableVertexAttribArray(vNormal);
+	var vNormal = gl.getAttribLocation(program,"vNormal");
+	gl.vertexAttribPointer(vNormal,4,gl.FLOAT,false,0,0);
+	gl.enableVertexAttribArray(vNormal);
 //
 	matrixLoc = gl.getUniformLocation(program,"rotation");
 
-	myNormalMatrixLoc = gl.getUniformLocation(program,"myNormalMatrix");//þetta verður bara null
+	myNormalMatrixLoc = gl.getUniformLocation(program,"myNormalMatrix");
 	gl.uniform4fv(gl.getUniformLocation(program,"ambientProduct"),ambientProduct);
 	gl.uniform4fv(gl.getUniformLocation(program,"diffuseProduct"),diffuseProduct);
 	gl.uniform4fv(gl.getUniformLocation(program,"specularProduct"),specularProduct);
-	gl.uniform4fv(gl.getUniformLocation(program,"lightPosition"),lightPosition);
-	gl.uniform1f(gl.getUniformLocation(program,"shininess"),materialShininess);
+	const P0 = document.getElementById("lpSx");
+	const P1 = document.getElementById("lpSy");
+	const P2 = document.getElementById("lpSz");
+	lpLoc = gl.getUniformLocation(program,"lightPosition");
+	lp(P0,0);
+	lp(P1,1);
+	lp(P2,2);
+
+	const R = document.getElementById("rin");
+	MSloc = gl.getUniformLocation(program,"shininess");
+	rinp(R);
 	//event listeners for mouse
 	canvas.addEventListener("mousedown",function(e){
 		movement = true;
@@ -134,14 +164,14 @@ function makeCube()
 	];
 
 	const NewVertices = [
-		vec3(-0.5,-0.5, 0.5,1.0),
-		vec3(-0.5, 0.5, 0.5,1.0),
-		vec3( 0.5, 0.5, 0.5,1.0),
-		vec3( 0.5,-0.5, 0.5,1.0),
-		vec3(-0.5,-0.5,-0.5,1.0),
-		vec3(-0.5, 0.5,-0.5,1.0),
-		vec3( 0.5, 0.5,-0.5,1.0),
-		vec3( 0.5,-0.5,-0.5,1.0)
+		vec4(-0.5,-0.5, 0.5,1.0),
+		vec4(-0.5, 0.5, 0.5,1.0),
+		vec4( 0.5, 0.5, 0.5,1.0),
+		vec4( 0.5,-0.5, 0.5,1.0),
+		vec4(-0.5,-0.5,-0.5,1.0),
+		vec4(-0.5, 0.5,-0.5,1.0),
+		vec4( 0.5, 0.5,-0.5,1.0),
+		vec4( 0.5,-0.5,-0.5,1.0)
 	];
 
 	const faceNormals = [
@@ -180,7 +210,7 @@ function makeCube()
 	}
 }
 
-const bakhlidMatrix = mult(mult(mult(mat4(),translate(-0.5,-0.5,0.0)),scalem(1.0,1.0,0.02)),translate(0.5,0.5,0.0));
+const bakhlidMatrix = mult(mult(translate(-0.5,-0.5,0.0),scalem(1.0,1.0,0.02)),translate(0.5,0.5,0.0));
 function render()
 {
 	"use strict";
@@ -194,7 +224,8 @@ function render()
 		vec3(mv[1][0], mv[1][1], mv[1][2]),
 		vec3(mv[2][0], mv[2][1], mv[2][2])
 	];
-
+	myNormalMatrix.matrix = true;
+	gl.uniformMatrix3fv(myNormalMatrixLoc, false, flatten(myNormalMatrix));
 	//"bakhlið"
 /*
 	mva = mult(mv,translate(-0.5,-0.5,0.0));
