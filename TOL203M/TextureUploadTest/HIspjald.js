@@ -63,7 +63,7 @@ function configureTexture( image ) {
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
 }
 
-function ainit()
+function ainit(ClBt)
 {
 	"use strict";
 	const fpckr = document.getElementById("finp");
@@ -86,11 +86,13 @@ function ainit()
 		Dimg.setAttribute("src",myUrl);
 		return;
 	}).then(() => {
-		binit();
+		const cb = ClBt.nextSibling;
+		cb.setAttribute("onclick","binit()");
+		cb.disabled = false;
 	});
 }
 
-function binit(some)
+function binit()
 {
     canvas = document.getElementById( "gl-canvas" );
     
@@ -179,11 +181,10 @@ function binit(some)
      }  );  
        
     render();
- 
 }
 
 var render = function(){
-    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     // staðsetja áhorfanda og meðhöndla músarhreyfingu
     var mv = lookAt( vec3(0.0, 0.0, zDist), vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0) );
