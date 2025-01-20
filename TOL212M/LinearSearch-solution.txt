@@ -1,0 +1,70 @@
+// Author of solution:    eti2
+// Permalink of solution: https://tio.run/##7VXNbtswDD7HT8FhlxZInHXHNG6xoRswoMOG/WCHogOUmIllO5Ijy6mDpq/T24CedtzFD5aR8k@bthuwnmcktCR@JEXysxSKmVpvt8MhvCpspA3oGeQ6LazUagT0oJUvPVJ/RLMQqVTJLuLL6xOP1V9zBBshTPViIVTISwAhO4dTqVCYz/SfRoM8wRStVn44WzNImxpKdplM8e9gqzscx5rRwOf1DwaKJv4FTiATc5pI7ZtCDZ@7Tfhuk98iVLDWBURihZzECkNnlRk9SXEBWWFdnAi7FIF@PD9xubTu@wybo0IjLIKArKsOJc9uQNJP1c5k3mzVWyDVOIQ6vU84LUwuV7gHYgQ5LsdS2aM@yBFZ2j7Ezbt0b9gHg7YwKoe9xK3sex43iEKQ@QZ83yd5fHzcjlstP98fyrvqF05KJ2MWG1GbO2FwWUiDOcHGAaFIxCxaEKq8YLXTJDAm7WZDgyCAwcEOIoFnvEaaIxBnyTlDyj8iZtqINAUDG@fVOM@jEVmac4bdtwwes3SbesT0ss3/IzWL@j83YgEWSwsRGm4/NU7Yuu1dnadTzGzetLRQUyaI32rfqV0FpFpnOQjyprQF2pC@wLBFTyisqRlA0DzSRRrCBJnIYd@xSNoWS07veHCfAafnvoEmWAutqXVKkckZwdvdESO8npxBPA4kXNZMomodXrlVcRYPDs6DoOxUca1LYBQ8oKvoyz7p@@X@oXd1j9Qc@cl8/k@2p5Ptlku7bOncOUb9O5W6toOY6BXe55MMgvgen1bCgGXeMIe83kXkzuujQHq9EKcGRU4FtGStCCkFUaGp4JIqaKl4y9sCLpsC9i69Xk1Uu0NTywF7Lpp10VrO8qTJ463IrVib6kaqOaTrJImL0Z3Dzx2e9bFJm7AUr9w9O7uTMYPuiZn4w2FDh0FWXdPhPxd8mb2h6zGRqahuAA3MZRpKHpRQ/YDq14pkXl1bCXoOmCRoLKlIP1sbybevUIRiY4cif@/96qevfW5PKGunNaCkb2zB0wXmlu67FKLqem7kdvsb
+
+// Use the command
+//   dafny LinearSearch-skeleton.dfy
+// or
+//   compile LinearSearch-skeleton.dfy
+// to compile the file.
+// Or use the web page tio.run/#dafny.
+
+// When you have solved the problem put
+// the solution on the Dafny web page,
+// generate a permalink and put it in
+// this file.
+
+method SearchRecursive( a: seq<int>, i: int, j: int, x: int ) returns (k: int)
+
+    // a: | ... | ??? | ... |
+    //     ^     ^     ^     ^
+    //     0     i     j    |a|
+    
+    requires 0 <= i <= j <= |a|
+    ensures i <= k < j || k == -1
+    ensures k != -1 ==> a[k] == x
+    ensures k != -1 ==> forall r | k < r < j :: a[r] != x
+    ensures k == -1 ==> forall r | i <= r < j :: a[r] != x
+{
+    // Put program text here so that Dafny
+    // accepts this function.
+    // In this function loops are not allowed
+    // but recursion should be used, and it
+    // is not allowed to call the function
+    // SearchLoop below.
+    //...
+	if j<=i {return -1;}
+	if a[j-1]==x {return j-1;}
+	k := SearchRecursive(a,i,j-1,x);
+}
+
+method SearchLoop( a: seq<int>, i: int, j: int, x: int ) returns (k: int)
+    requires 0 <= i <= j <= |a|
+    ensures i <= k < j || k == -1
+    ensures k != -1 ==> a[k] == x
+    ensures k != -1 ==> forall r | k < r < j :: a[r] != x
+    ensures k == -1 ==> forall r | i <= r < j :: a[r] != x
+{
+    // Put program text here so that Dafny
+    // accepts this function.
+    // In this function recursion is not allowed
+    // and it is not allowed to call the function
+    // SearchRecursive above.
+    //...
+	if i==j {return -1;}
+	var t := j-1;
+	while t>=i
+	decreases t
+	invariant forall q | t < q < j :: a[q] != x
+	{
+		if a[t]==x {return t;}
+		t := t-1;
+	}
+	k := -1;
+    // Fastayrðing lykkju:
+    //    a: | ??? | allt !=x |
+    //        i     p          j
+}
+
+//ensures-pælingar
+//Ef skilað er gildi er x í því sæti og ekkert x er fyrir ofan það sæti
+//M.ö.o. fundið er það x sem er mest til hægri
