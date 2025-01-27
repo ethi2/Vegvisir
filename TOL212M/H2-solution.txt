@@ -1,0 +1,69 @@
+// Author of question: Snorri Agnarsson
+// Permalink of question: https://tinyurl.com/3xz4kd2p
+
+// Authors of solution:   eti2
+// Permalink of solution: https://tio.run/##3VU9b9swEJ2tX3FFhyaIYiduJzsJ0KIFWqBAi36gQ5CBkU42LYmkSCqx8vFjOnbr1LGLf1h6R8l24iZAgG4FZMkk3z294z2eUpGp5uZmMICXtZ9qCzqDqkbnpVYj@Ky0tRJeTpSwzmkVEe4j2lIUUuV3oVPvjRsNBl6qprZFP9Hl4Pn84kWeDk0UrfgdRzld1G0UAHo5/It2Dfjy6jWvfnUIfopArKVQKU8BpKwdTmtZpPB2uOtyLNBr1U@zhgFeM9zIog3N6E@f5z9YqDu6czwFIyY0kLpvazV4Gjj7QfC3KSpodA1TcYYs6QzTEGWsPi2wBFP78J4prgQDXTx@HaQt6WOGTVChFR5BgFnlSrkwDUi6VEsmXZAKVAsshSzu8lNSJaURlUi7mcJnFDaZfsKktk6e4RaIETisDiyK4igGOSJaH8Ose85HwCuwTQ9fW@VgC/KwBttRL8WEVh06mO3KqGexqqWl0R4cHILk24xvV@Lq1mKmrSgKaOILuGqRDRzABf0IB6MRiOPmBI4O6XlxEvVQuZrDAl0eONeTHZclprBuiSVvOWzgmN@LzZfY2Qp7QNDLqCczIjpk3ZdtwiDH11HvTFgoYURJ7WxRqtuD4ThgxXEZQuEy59XNzRWxjMt4vs0UWJCFHoKVO/vxrAVeb5Tqvdbm36r0H5SF99@E/R@3g4oHMxqcT9n65slhdduO1a6h@ihCSkGbEEQYvlWd0vXafVrNhtZ70dUdtXM4ChFRj@Su/WJ2tkhL65eecA6tb4WUQQ3PLm3Er4LLkCXZgS3TeSbkWvLENdcruNKM2Sh0/N9kgJmXNhOWWoOEjOUhdYI8l@BEufjd5LmHxe/Fd5quOSRb/Cqol7QQsfhJ7WoiwC1@WLCLH96HuVJ42Taltre9y9qeqItCn0s1gc6k1HyUppAkQePbdqeWPS6rVcI9yIGwGGCnSK2RoxP6TGDii6brYuFNz6jXG6koYt2vvtDnYtP@K7tH1NNh08EmrpYOpp3mMq0dbDoHVyfkKg7mQuX760MZTpuI92IK4fMYQF3dbtV@b@Xq/TtWeQhPsC5gJaU193itYnh/a3i8lOHjpAwflHJ9c/MH
+// Use the command
+//   dafny build H2-skeleton.dfy
+// to compile the file.
+// Or use the web page tio.run/#dafny.
+
+// When you have solved the problem put
+// the solution on the Dafny web page,
+// generate a permalink and put it in
+// this file or email the solution to me.
+
+method SearchRecursive( a: seq<real>, i: int, j: int, x: real ) returns ( k: int )
+	decreases j-i
+	requires 0 <= i <= j <= |a|
+	requires forall y,z | 0 <= y < z < |a| :: a[y] >= a[z]
+	ensures i <= k <= j
+	ensures forall r | i <= r < k :: a[r] >= x
+	ensures forall r | k <= r < j :: a[r] < x
+{
+	if i == j {return i;}
+	var m := i+(j-i)/2;
+	if a[m] < x {k := SearchRecursive(a,i,m,x);}
+	else {k := SearchRecursive(a,m+1,j,x);}
+}
+
+method SearchLoop( a: seq<real>, i: int, j: int, x: real ) returns ( k: int )
+	requires 0 <= i <= j <= |a|
+	requires forall y,z | 0 <= y < z < |a| :: a[y] >= a[z]
+	ensures i <= k <= j
+	ensures forall r | i <= r < k :: a[r] >= x
+	ensures forall r | k <= r < j :: a[r] < x
+{
+	var p := i;
+	var q := j;
+	while p!=q
+	decreases q-p
+	invariant i <= p <= q <= j
+	invariant forall r | i <= r < p :: a[r] >= x
+	invariant forall r | q <= r < j :: x > a[r]
+	{
+		var m := p+(q-p)/2;
+		assert p <= m <= q;
+		if a[m] >= x {p := m+1;}
+		else {q := m;}
+	}
+	return p;
+}
+
+// Ef eftirfarandi fall er ekki samþykkt þá eru
+// föllin ekki að haga sér rétt að mati Dafny.
+
+// If the following method is not accepted then
+// the functions are not behaving correctly in
+// Dafny's opinion.
+
+method Test( a: seq<real>, x: real )
+    requires forall p,q | 0 <= p < q < |a| :: a[p] >= a[q]
+{
+    var k1 := SearchLoop(a,0,|a|,x);
+    assert forall r | 0 <= r < k1 :: a[r] >= x;
+    assert forall r | k1 <= r < |a| :: a[r] < x;
+    var k2 := SearchRecursive(a,0,|a|,x);
+    assert forall r | 0 <= r < k2 :: a[r] >= x;
+    assert forall r | k2 <= r < |a| :: a[r] < x;
+}
