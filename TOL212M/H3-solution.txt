@@ -1,0 +1,76 @@
+// Höfundur spurningar:  Snorri Agnarsson, snorri@hi.is
+
+// Höfundur lausnar:     eti2
+// Permalink lausnar:    https://tio.run/##tVZNb9tGED2Lv2JysyFHdnOU7KAt0qK9BXVvgg4raSiuSe7Ss0tbH9aPyaVADgV8yiFAe@EPc2aWpEQmdoseKtiUuPve7Hy8GXKpYrN5ejo/h1@qT3FpliWBK0oy2qwUjQGujSXS8MPKKHLOmjNwYeX7RI@0i6IeM1OlM4HGH/T6jWy/R8pVpk3a2/79x3eB/KtxSF5bA86ShxyrR0huqg9ZAQlmObtRMiVD7RWNniHca5@AT1DQBdgY5prxG3CoaJGMoihHn9glXIf7E3Bj3rq91Ma/PYP1GPgHnAKh55gdnEDaLEXiJB/3U5pqyKsPMCfceAWxJZfqbEPVY5kDe6sAY6@7i7HKMqeNa028s2Csh0WizAqDrwXhwpqlljAcWKoXrfPH1UAmvC01oZNT2SgUZ7fwABdweQUFXMIt/z@4BxhzTNNiJstuejsLVDSuFGYAp3JhZG@nsalbi5qtpbUtHWytX4KnLfxwOBPevkDYMmHLOWXUaJTOBL990XoHnI5GDfgbyw6urhpzwxoY7dpkX6O/0ayhO76gXinOJzhvY3MoCyTVR5ZSg39felAGVFGQLUgrjzC3y40oSYrCwl4EsSVI2JJGo1E00HEInz25gF2tH7iY7KPB@bkDJLhDnXq4U@vgAlWfqkdm3SmCOYyZNKlvUG7YEN/eJzrj0zmvGA2WuCBUjqPF13M@zTBYK1ZmqNVcLthWtbPb5JHaohJbm9c1oqaoz6OxRR9qSk1NB7toEFz14up8eMIOnZ6/YYclB27q2S6sYRfC8sPvJAcDzBzCLgTnZYH/0kCfRPtjT3IDn0A@hrzMvHboQ1v22pGO7dr0ZCuClnNCp1KE/Dk5PdcvFMKjpl9I@uUfxRNTmTuvs0xGEfAgILAr9tD5vpBIii5TQDWTAk2N4mVT/dXOD4c5VH/LIfPqs3yx6b4YO0rUhocBz86taiZFzMewV83xHUnyunZBsY0UQ4nnoie2GeC8r8Dg/XFrY0twiS2zJYjYfF/gUnIhfl0ermLOxSf5MZ1NAqWWbjjm1dUBv9uHze4kbaeocl7JuAxJzTZpelManttd/LdjM7O2gIN6D9hjq4gDh@WjzPMgkKNehi/g/ptqhLvrOvzy6DkG2NFMw/r5hh9v1R8rYfJTzsNKZ0ysPtfZD0/ELp4/Upk1jB/4omuRTb5CBCbXR75fH8qx3vdwLGNOsJxbPxxFiqD4NtbsKo@sj97zaORK9T2o/mS1tVhuDX5TgOl6xr6YsNcL71/mayjpUcgN6TfM7R2CNcixZiWPYbJ5HVTJI3z1/@RDGqvksdVmw0oilsHNBb/y4MJDkakFdjkM0uGFpMkA3/fiP3TSVvzbHv0Li7H41LyZ0Nn2tG0r4mdbPBtOt7MhTWN@vsnGsyFsmxD20f7p6Qs
+
+// Insertion sort með hjálp helmingunarleitar.
+// Insertion sort with the help of binary search.
+
+method Search( s: seq<int>, x: int ) returns ( k: int )
+    // Ekki má breyta forskilyrðum eða eftirskilyrðum fallsins
+    // Do not change the preconditions or the postconditions
+    requires forall p,q | 0 <= p < q < |s| :: s[p] <= s[q]
+    ensures 0 <= k <= |s|
+    ensures forall i | 0 <= i < k :: s[i] <= x
+    ensures forall i | k <= i < |s| :: s[i] >= x
+    ensures forall z | z in s[..k] :: z <= x
+    ensures forall z | z in s[k..] :: z >= x
+    ensures s == s[..k]+s[k..]
+{
+    // Setjið viðeigandi stofn fallsins hér.
+    // Put an appropriate body of the function here.
+    //...
+	if |s| == 0 {return 0;}
+	//s er veikt vaxandi röð.
+	var b := 0;
+	var e := |s|;
+	while b < e
+	decreases e-b
+	invariant 0 <= b <= e <= |s|
+	invariant forall r | 0 <= r < b :: s[r] <= x
+	invariant forall r | e <= r < |s| :: s[r] >= x
+	{
+		var t := b+(e-b)/2;
+		if s[t] < x {b := t+1;}
+		else {e := t;}
+	}
+	k := b;
+}
+
+method Sort( m: multiset<int> ) returns ( r: seq<int> )
+    ensures multiset(r) == m
+    ensures forall p,q | 0 <= p < q < |r| :: r[p] <= r[q]
+{
+    // Setjið viðeigandi frumstillingu á r og rest hér.
+    // r er skilabreyta en rest er ný breyta sem þið búið til.
+    // Put appropriate initializations of r and rest here.
+    // r is the return variable but rest is a new variable you should create.
+    //...
+	var rest: multiset<int> := m;
+	r := [];
+    while rest != multiset{}
+        // Ekki breyta fastayrðingu lykkjunnar
+        // Do not change the loop invariant
+        decreases rest
+        invariant m == multiset(r)+rest
+        invariant forall p,q | 0 <= p < q < |r| :: r[p] <= r[q]
+    {
+        // Setjið viðeigandi stofn lykkjunnar hér.
+        // Fjarlægið eitt gildi úr rest með
+        //    var x :| x in rest;
+        //    rest := rest-multiset{x};
+        // og notið Search til að finna réttan stað
+        // í r til að stinga [x] inn í r.
+        // Put an appropriate body of the loop here.
+        // Remove one value from rest using
+        //    var x :| x in rest;
+        //    rest := rest-multiset{x};
+        // and use Search to find the correct place
+        // to insert [x] into r.
+        //...
+	var z :| z in rest;
+	var f := Search(r,z);
+	r := r[..f]+[z]+r[f..];
+	rest := rest-multiset{z};
+    }
+}
