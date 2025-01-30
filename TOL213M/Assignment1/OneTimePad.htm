@@ -1,0 +1,336 @@
+<html>
+<head>
+<title>One-Time Pad</title>
+<style>
+canvas
+{
+	background-color:#000000;
+}
+input
+{
+	margin-top:1px;
+	margin-bottom:1px;
+}
+summary
+{
+	cursor:pointer;
+}
+fieldset
+{
+	display: inline-block;
+}
+pre
+{
+	font-size: larger;
+}
+th
+{
+	white-space: nowrap;
+}
+</style>
+</head>
+<body>
+Move mouse over canvas to generate randomness.
+<table border=1><thead>
+<tr><th>Canvas</th><th>Random key generation</th><th>Import key</th><th>Raw file</th></tr>
+</thead><tbody><tr><td valign=top>
+<canvas height="512" width="512" id="sor"></canvas>
+</td><td valign=top>
+Current length: <span id="res">0</span><br>
+<input type=button value="Reset generation" onclick=resetGeneration()><br>
+<input type=button value="Use current" onclick=useCurrentKey()> <input type=button value="view used" onclick=viewUsedKey()><br>
+<div id="Glog"> </div><hr>
+Length of used key: <span id="ukl"></span><br>
+<a id="adlk">Download key</a>
+</td><td valign=top>
+<input type=file id="ikf"><br>
+<input type=button value="load keyfile" onclick=loadKeyfile()> <input type=button value="use as key" onclick=useKeyfile()><br>
+<span id="IKlog"></span>
+</td><td valign=top>
+<input type=file id="ofp"><br>
+<input type=button value="load file" onclick=loadFromFile()> <input type=button value="view raw file" onclick=viewRawFile()><br>
+<span id="Flog"> </span>
+<hr>
+<input type=button value="process file" onclick=processFile()> <input type=button value="view processed file" onclick=viewProcessedFile()><br>
+<span id="Plog"> </span><hr>
+<a id="adlpf">Download processed file</a>
+</td></tr></tbody></table>
+
+<details><summary>Key</summary>
+<fieldset><legend id="keylegend">No key</legend>
+<pre id="keydisplay"></pre>
+</fieldset>
+</details>
+
+<details><summary>Raw file</summary>
+<fieldset><legend id="rawfilelegend">No file</legend>
+<pre id="rawfiledisplay"></pre>
+</fieldset>
+</details>
+
+<details><summary>Processed file</summary>
+<fieldset><legend id="cookedfilelegend">No file</legend>
+<pre id="cookedfiledisplay"></pre>
+</fieldset>
+</details>
+
+<script>
+const Dsor = document.getElementById("sor");
+const Dres = document.getElementById("res");
+const DGlog = document.getElementById("Glog");
+const Dukl = document.getElementById("ukl");
+const Dadlk = document.getElementById("adlk");
+const Dikf = document.getElementById("ikf");
+const DIKlog = document.getElementById("IKlog");
+const Dofp = document.getElementById("ofp");
+const DFlog = document.getElementById("Flog");
+const DPlog = document.getElementById("Plog");
+const Dadlpf = document.getElementById("adlpf");
+const Dkeylegend = document.getElementById("keylegend");
+const Dkeydisplay = document.getElementById("keydisplay");
+const Drawfilelegend = document.getElementById("rawfilelegend");
+const Drawfiledisplay = document.getElementById("rawfiledisplay");
+const Dcookedfilelegend = document.getElementById("cookedfilelegend");
+const Dcookedfiledisplay = document.getElementById("cookedfiledisplay");
+const codepage437toHTML = [
+	"&#9216;","&#9786;","&#9787;","&#9829;","&#9830;","&#9827;","&#9824;","&#8226;","&#9688;","&#9675;","&#9689;","&#9794;","&#9792;","&#9834;","&#9835;","&#9788;",
+	"&#9658;","&#9668;","&#8597;","&#8252;","&#182;", "&#167;", "&#9644;","&#8616;","&#8593;","&#8595;","&#8594;","&#8592;","&#8735;","&#8596;","&#9650;","&#9660;",
+	"&#9248;","&#33;",  "&#34;",  "&#35;",  "&#36;",  "&#37;",  "&#38;",  "&#39;",  "&#40;",  "&#41;",  "&#42;",  "&#43;",  "&#44;",  "&#45;",  "&#46;",  "&#47;",
+	"&#48;",  "&#49;",  "&#50;",  "&#51;",  "&#52;",  "&#53;",  "&#54;",  "&#55;",  "&#56;",  "&#57;",  "&#58;",  "&#59;",  "&#60;",  "&#61;",  "&#62;",  "&#63;",
+	"&#64;",  "&#65;",  "&#66;",  "&#67;",  "&#68;",  "&#69;",  "&#70;",  "&#71;",  "&#72;",  "&#73;",  "&#74;",  "&#75;",  "&#76;",  "&#77;",  "&#78;",  "&#79;",
+	"&#80;",  "&#81;",  "&#82;",  "&#83;",  "&#84;",  "&#85;",  "&#86;",  "&#87;",  "&#88;",  "&#89;",  "&#90;",  "&#91;",  "&#92;",  "&#93;",  "&#94;",  "&#95;",
+	"&#96;",  "&#97;",  "&#98;",  "&#99;",  "&#100;", "&#101;", "&#102;", "&#103;", "&#104;", "&#105;", "&#106;", "&#107;", "&#108;", "&#109;", "&#110;", "&#111;",
+	"&#112;", "&#113;", "&#114;", "&#115;", "&#116;", "&#117;", "&#118;", "&#119;", "&#120;", "&#121;", "&#122;", "&#123;", "&#166;", "&#125;", "&#126;", "&#8962;",
+	"&#199;", "&#252;", "&#233;", "&#226;", "&#228;", "&#224;", "&#229;", "&#231;", "&#234;", "&#235;", "&#232;", "&#239;", "&#238;", "&#236;", "&#196;", "&#197;",
+	"&#201;", "&#230;", "&#198;", "&#244;", "&#246;", "&#242;", "&#251;", "&#249;", "&#255;", "&#214;", "&#220;", "&#162;", "&#163;", "&#165;", "&#8359;","&#402;",
+	"&#225;", "&#237;", "&#243;", "&#250;", "&#241;", "&#209;", "&#170;", "&#186;", "&#191;", "&#8976;","&#172;", "&#189;", "&#188;", "&#161;", "&#171;", "&#187;",
+	"&#9617;","&#9618;","&#9619;","&#9474;","&#9508;","&#9569;","&#9570;","&#9558;","&#9557;","&#9571;","&#9553;","&#9559;","&#9565;","&#9564;","&#9563;","&#9488;",
+	"&#9492;","&#9524;","&#9516;","&#9500;","&#9472;","&#9532;","&#9566;","&#9567;","&#9562;","&#9556;","&#9577;","&#9574;","&#9568;","&#9552;","&#9580;","&#9575;",
+	"&#9576;","&#9572;","&#9573;","&#9561;","&#9560;","&#9554;","&#9555;","&#9579;","&#9578;","&#9496;","&#9484;","&#9608;","&#9604;","&#9612;","&#9616;","&#9600;",
+	"&#945;", "&#223;", "&#915;", "&#960;", "&#931;", "&#963;", "&#181;", "&#964;", "&#934;", "&#920;", "&#937;", "&#948;", "&#8734;","&#966;", "&#949;", "&#8745;",
+	"&#8801;","&#177;", "&#8805;","&#8804;","&#8992;","&#8993;","&#247;", "&#8776;","&#176;", "&#8729;","&#183;", "&#8730;","&#8319;","&#178;", "&#9632;","&#9251;"
+];
+function i8aToHTMLstring(i8a,Delem)
+{
+	let outStr = "";
+	for(let i=0;i<i8a.length;i++)
+	{
+		outStr = outStr.concat(codepage437toHTML[i8a[i]]);
+		if(i%80 == 79){outStr = outStr.concat("\n");}//80 characters per line
+	}
+	Delem.innerHTML = outStr;
+}
+let KS = [];
+let CUi8;
+Dsor.onmousemove = (e) => {
+	const cal = (Date.now()+(e.x^e.y))%256;
+	KS.push(cal);
+	Dres.innerText = KS.length;
+}
+function resetGeneration()
+{
+	KS = [];
+	Dres.innerText = KS.length;
+}
+let keyblob,keyurl;
+function useCurrentKey()
+{
+	if(KS.length>0)
+	{
+		CUi8 = new Uint8Array(KS);
+		Dukl.innerText = CUi8.length;
+		DGlog.innerText = "Random key used";
+		keyblob = new Blob([CUi8]);
+		keyurl = URL.createObjectURL(keyblob);
+		Dadlk.setAttribute("href",keyurl);
+	}
+	else
+	{
+		DGlog.innerText = "Empty key";
+	}
+}
+function viewUsedKey()
+{
+	if(CUi8?.length>0)
+	{
+		Dkeylegend.innerText = `Key length:${CUi8.length}`;
+		i8aToHTMLstring(CUi8,Dkeydisplay);
+	}
+	else
+	{
+		DGlog.innerText = "No key in use";
+	}
+}
+let FCa;//File content array
+function loadFromFile()
+{
+	if(Dofp==null)
+	{
+		DFlog.innerText = "File picker not found";
+		return;
+	}
+	if(Dofp.files.length < 1)
+	{
+		DFlog.innerText = "No file picked";
+		return;
+	}
+	Dofp.files[0].arrayBuffer().then((daBuf) => {
+		FCa = new Uint8Array(daBuf);
+		DFlog.innerText = `File loaded, size: ${FCa.length} bytes`;
+	}).catch((error) => {
+		DFlog.innerText = error.toString();
+	});
+}
+function viewRawFile()
+{
+	if(FCa)
+	{
+		if(FCa.length>0)
+		{
+			Drawfilelegend.innerText = `File length:${FCa.length}`;
+			i8aToHTMLstring(FCa,Drawfiledisplay);
+		}
+		else
+		{
+			DFlog.innerText = "File empty";
+		}
+	}
+	else
+	{
+		DFlog.innerText = "No file loaded";
+	}
+}
+let FPra;//File processed array
+let procblob, procurl;
+function processFile()
+{
+	if(FCa)
+	{
+		if(FCa.length > 0)
+		{
+			if(CUi8)
+			{
+				if(CUi8.length > 0)
+				{
+					FPra = new Uint8Array(FCa);
+					const ks = CUi8.length;
+					let loopcount=0,Ki=0,Fi=0;
+					for(Fi=0;Fi<FCa.length;Fi++)
+					{
+						FPra[Fi] = FPra[Fi]^CUi8[Ki];
+						Ki++;
+						if(Ki >= ks)
+						{
+							Ki-=ks;
+							loopcount++;
+						}
+					}
+					Plog.innerText = `File processed. Length: ${FPra.length} bytes; keyloops: ${loopcount}, last: ${Ki}`;
+					procblob = new Blob([FPra]);
+					procurl = URL.createObjectURL(procblob);
+					Dadlpf.setAttribute("href",procurl);
+				}
+				else
+				{
+					Plog.innerText = "Key empty";
+				}
+			}
+			else
+			{
+				Plog.innerText = "No key in use";
+			}
+		}
+		else
+		{
+			Plog.innerText = "File empty";
+		}
+	}
+	else//no file
+	{
+		Plog.innerText = "No file loaded";
+	}
+}
+function viewProcessedFile()
+{
+	if(FPra)
+	{
+		if(FPra.length > 0)
+		{
+			Dcookedfilelegend.innerText = `File length:${FPra.length}`;
+			i8aToHTMLstring(FPra,Dcookedfiledisplay);
+		}
+		else
+		{
+			Plog.innerText = "Processed file empty";
+		}
+	}
+	else
+	{
+		Plog.innerText = "No file processed";
+	}
+}
+let KFa;//key file array
+function loadKeyfile()
+{
+	if(Dikf==null)
+	{
+		DIKlog.innerText = "Keyfile picker not found";
+		return;
+	}
+	if(Dikf.files.length < 1)
+	{
+		DIKlog.innerText = "No keyfile picked";
+		return;
+	}
+	Dikf.files[0].arrayBuffer().then((daBuf) => {
+		KFa = new Uint8Array(daBuf);
+		DIKlog.innerText = `Keyfile loaded, size: ${KFa.length} bytes`;
+	}).catch((error) => {
+		DIKlog.innerText = error.toString();
+	});
+}
+let IKblob,IKurl;
+function useKeyfile()
+{
+	if(KFa)
+	{
+		if(KFa.length>0)
+		{
+			CUi8 = new Uint8Array(KFa);
+			Dukl.innerText = CUi8.length;
+			DGlog.innerText = "Imported key used";
+			IKblob = new Blob([CUi8]);
+			IKurl = URL.createObjectURL(IKblob);
+			Dadlk.setAttribute("href",IKurl);
+		}
+		else
+		{
+			DIKlog.innerText = "Empty imported key";
+		}
+	}
+	else
+	{
+		DIKlog.innerText = "No keyfile loaded";
+	}
+}
+</script>
+</body>
+</html>
+<!--
+&#9216;&#9786;&#9787;&#9829;&#9830;&#9827;&#9824;&#8226;&#9688;&#9675;&#9689;&#9794;&#9792;&#9834;&#9835;&#9788;
+&#9658;&#9668;&#8597;&#8252;&#182;&#167;&#9644;&#8616;&#8593;&#8595;&#8594;&#8592;&#8735;&#8596;&#9650;&#9660;
+&#9248;&#33;&#34;&#35;&#36;&#37;&#38;&#39;&#40;&#41;&#42;&#43;&#44;&#45;&#46;&#47;
+&#48;&#49;&#50;&#51;&#52;&#53;&#54;&#55;&#56;&#57;&#58;&#59;&#60;&#61;&#62;&#63;
+&#64;&#65;&#66;&#67;&#68;&#69;&#70;&#71;&#72;&#73;&#74;&#75;&#76;&#77;&#78;&#79;
+&#80;&#81;&#82;&#83;&#84;&#85;&#86;&#87;&#88;&#89;&#90;&#91;&#92;&#93;&#94;&#95;
+&#96;&#97;&#98;&#99;&#100;&#101;&#102;&#103;&#104;&#105;&#106;&#107;&#108;&#109;&#110;&#111;
+&#112;&#113;&#114;&#115;&#116;&#117;&#118;&#119;&#120;&#121;&#122;&#123;&#166;&#125;&#126;&#8962;
+&#199;&#252;&#233;&#226;&#228;&#224;&#229;&#231;&#234;&#235;&#232;&#239;&#238;&#236;&#196;&#197;
+&#201;&#230;&#198;&#244;&#246;&#242;&#251;&#249;&#255;&#214;&#220;&#162;&#163;&#165;&#8359;&#402;
+&#225;&#237;&#243;&#250;&#241;&#209;&#170;&#186;&#191;&#8976;&#172;&#189;&#188;&#161;&#171;&#187;
+&#9617;&#9618;&#9619;&#9474;&#9508;&#9569;&#9570;&#9558;&#9557;&#9571;&#9553;&#9559;&#9565;&#9564;&#9563;&#9488;
+&#9492;&#9524;&#9516;&#9500;&#9472;&#9532;&#9566;&#9567;&#9562;&#9556;&#9577;&#9574;&#9568;&#9552;&#9580;&#9575;
+&#9576;&#9572;&#9573;&#9561;&#9560;&#9554;&#9555;&#9579;&#9578;&#9496;&#9484;&#9608;&#9604;&#9612;&#9616;&#9600;
+&#945;&#223;&#915;&#960;&#931;&#963;&#181;&#964;&#934;&#920;&#937;&#948;&#8734;&#966;&#949;&#8745;
+&#8801;&#177;&#8805;&#8804;&#8992;&#8993;&#247;&#8776;&#176;&#8729;&#183;&#8730;&#8319;&#178;&#9632;&#9251;
+-->
