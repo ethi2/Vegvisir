@@ -41,6 +41,7 @@ Current length: <span id="res">0</span><br>
 <input type=button value="Use current" onclick=useCurrentKey()> <input type=button value="view used" onclick=viewUsedKey()><br>
 <div id="Glog"> </div><hr>
 Length of used key: <span id="ukl"></span><br>
+Shannon entropy of used key: <span id="shent"></span><br>
 <a id="adlk">Download key</a>
 </td><td valign=top>
 <input type=file id="ikf"><br>
@@ -79,6 +80,7 @@ const Dsor = document.getElementById("sor");
 const Dres = document.getElementById("res");
 const DGlog = document.getElementById("Glog");
 const Dukl = document.getElementById("ukl");
+const Dshent = document.getElementById("shent");
 const Dadlk = document.getElementById("adlk");
 const Dikf = document.getElementById("ikf");
 const DIKlog = document.getElementById("IKlog");
@@ -140,6 +142,7 @@ function useCurrentKey()
 		CUi8 = new Uint8Array(KS);
 		Dukl.innerText = CUi8.length;
 		DGlog.innerText = "Random key used";
+		Dshent.innerText = entropyA(CUi8);
 		keyblob = new Blob([CUi8]);
 		keyurl = URL.createObjectURL(keyblob);
 		Dadlk.setAttribute("href",keyurl);
@@ -225,7 +228,7 @@ function processFile()
 							loopcount++;
 						}
 					}
-					Plog.innerText = `File processed. Length: ${FPra.length} bytes; keyloops: ${loopcount}, last: ${Ki}`;
+					Plog.innerText = `File processed. Length: ${FPra.length} bytes; keyloops: ${loopcount}, last: ${Ki}\nShannon entropy: ${entropyA(FPra)}`;
 					procblob = new Blob([FPra]);
 					procurl = URL.createObjectURL(procblob);
 					Dadlpf.setAttribute("href",procurl);
@@ -299,6 +302,7 @@ function useKeyfile()
 			CUi8 = new Uint8Array(KFa);
 			Dukl.innerText = CUi8.length;
 			DGlog.innerText = "Imported key used";
+			Dshent.innerText = entropyA(CUi8);
 			IKblob = new Blob([CUi8]);
 			IKurl = URL.createObjectURL(IKblob);
 			Dadlk.setAttribute("href",IKurl);
@@ -312,6 +316,30 @@ function useKeyfile()
 	{
 		DIKlog.innerText = "No keyfile loaded";
 	}
+}
+
+function entropyA(ui8a)//modified from https://rosettacode.org/wiki/Entropy#JavaScript
+{
+	const len = ui8a.length
+
+	// Build a frequency map from the string.
+	const frequencies = new Uint8Array(ui8a)
+		.reduce((freq, c) => (freq[c] = (freq[c] || 0) + 1) && freq, {})
+
+	// Sum the frequency of each character.
+	return Object.values(frequencies)
+		.reduce((sum, f) => sum - f/len * Math.log2(f/len), 0)
+}
+
+function LangRand(N)
+{
+	if(typeof(N)!="number"){return;}
+	const LRa = new Uint8Array(N);
+	for(let i=0;i<N;i++)
+	{
+		LRa[i] = Math.floor(Math.random()*256);
+	}
+	return LRa;
 }
 </script>
 </body>
