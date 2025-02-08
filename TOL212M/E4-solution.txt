@@ -1,0 +1,204 @@
+// Author of question:  Snorri Agnarsson, snorri@hi.is
+
+// Author of solution:     eti2
+// Permalink of solution:  https://tio.run/##vVlLbxvJET5Lv6JzWUnQhF47b0kUomCxSIBNYsS@BIYOPcMm2eZM97B7hhIt6a8s4IsBHxYwsMAecvBlfpjzVfU8SUper50QkjjTXdXV9X5oIqdm/eHDo0fioizm1gk7FctS@UJbcyLEM2Od0@JiZqTz3ppIeF7581yPtN/fH@B5m5Y1Hj6q0E9o/6lymUy1WWyAjEYjwv@sD53/fK69wE8xV8IX0hVEh17y3vNUpwoPshB@bst0IowtCDlWIplLM1OTkfjWpqm90mYWABm9Ppef17ZssAk14I0@mwU662/@mXWFmhzKI6Gc8LIoRPW@ei3sDN@r6gchq3dKG0/fhOClMXgUvnpLS0Lyk8MjvQE@08YspJlo4aqfqnejTSrEmCuV0FMBKGFNuqZnTSwTbO7sSpkgCUnQ2oiJ8onCkZCQdRPlRvu5UxOdyEJ1Zwt5IrxanmlTnIuj/Zt9soWpdTJNRR4txa34WpyNRS7OxBK/t/JWnJwI@SK/FOdjfC8v9@9YJs@IRcfc5XahRabwBBmUpGW8e5n5lXQAcaUpCWMDYiTEN2TdkKB0ML2ser1SM7BiUxPbmfSLYAOFTpnKFFKXBAxxiep7RW9QxkzOTKpmRQvHsidEFvV/ioXNpMGDEySCoIjqLWnwB3pxwFvpBV2req9m0hFqoymcD@akyMLlGy0zEzOdQn3XcDmVEc5MTUsXzII4NtC5GI/Fi@tL1u5T0phvNJaVaaG9KsSVLuZQrxIqVZkyhUjgv8rn1kxY0YUl41HweZOoDnol01KNagEapSYwPZHqokgVYc1VmhOqU3DtV@Ra2o9aVyw9rprSPpsR34lpwZVAG1cTU2ezIC/A85WSgmyMvThXiZapSKRnYldz5XA1JSS@PHDIAnssZs21YcPt3QnxGqg6mdOhBuIM4lEdt538IJtMimc4OFWFNYciO2nPZ1OGFjq7jsT1CS5bwL7Juh3O0@AL9MBBtmPND9du/S1Rfkx/brNb3lTGl7yX/bohfHN9x3BfDwCaSw8WM1rs4d2/eeiPBput42L9Bp6XKYTzifiXyqC5fxrFDj0QhTgCJ0XpjD8U8ZaYdkuG3Bzu/XhAWtK94uP@tUO4uBYnt0Fw8pQXYnGC2NAXzGkdJeCn3msxf1m9ThGlsWnIOjq/bd22BiGkYNWtL287MsfMEicZ3fnzqM02wVoGhs4OEc5tzD5YPLxx0@wbE@4svzHA72xWFvY7fhZiW/QsjM1PJORBZ5v3gAS13LMZ/zwy8cfJJL3gvxNkwy7kwDTlwcZ2PNiON7e7hHbvzhZOnYpeIRG9Yguj9PPqfHz9MFjMYGebYAldUB4cwx@P44OBdTc5jzLe2Tg/u5UHIdUdUK4jyg@DxwE8bsDjXeAdGwd8wcDRV191HN2HEHcIMSOcfQThy1NolZQMQ1Kr8OSIxduPEMdxHSOk9wrZ4zbhEEnCPX58TEI77W8PCw@S6/KMUHCxZdDIeHwuEoj4fJyg9vjZyONxD3t5OR5fE4u1lvFER47HQdf1ay@e/Q8JNC@fxk937vJ8IJbemcvLVpW/gEDNzzaFmrPPPf/8nuObY0K6eOqqH6condyUDkJhRaVi9W5KDU@oNZ@i1NfUolDtTfbJ5Xb1FtXba6c0yjbKKiFnrLRD7cY5JCx2eeIiTVHGLahuRb0WO7Xm2hLJqhREm6rTi2JeznQo@ziXveeaM1xtodMZ6BlcC3Wkk6UJpR/RpKwUasKt26J0rC83l1MZAWeEMg6CowPXrnqnCQ3AagqO20WirZ0LxGXgQBSQioC0EibAqQyllZ6g3q/rzI48mggu2ukKVKZRBpQxCrImw4XM2Z6WlTi7a8IyO9FTTV3YP2yhE9Ukzj7KxCpqQwhjKlEtTtRUGxXauxoGtyvWD12t7t/mcqUioUk03N7hhqiHGdw38Ln1RWKbRe4jre9I@VFTKj2HmLYLxrb3QY@Cmg31C13gMDsaWHSv@hqsb5ZsYRMNGspFcV5XhDdthiUaMsojrpNazltimwf3ImqOiLoFdF@OzD8K2aTJGvKudrsLuE06pcFBoUPXU/3IXZmOEPW55YXpizm6Ja7XZhKVGLcnfoXaqnozK9pWd6HWsFOFVmS@knVn@xxK/LsE/dZYYDiwLnQuCVxOurWIS241cnxRO8FWZB0hoB6j5oJsAo@kVJ4BWOqyWiXT6Yd9lV53Km1k@XX0p@hx9MfoSfSH6DfR76PfRr/bWQPVxdKngd9t79XazR0V3Nen9Bzk/UVnKorGA2GKAuHS0AN@vT1dYT30RyjdCZvTE3b2NZkLjxEgasLVWV53qFKslPMc1GgYpZMFVcxfYNJS67JzkAd6G7Grucm5iuYyd9PZSfrg4i/VGzbxFf1pysRHdWXzaKISdMwecYzDL0X0n9y0zBrsi8nkISTpuRVHmNzfG7ZWiAh797VVcPHktNve7bLs3PfCJJ1b3zR3/bZ1Z1/YqeHM4TXFxRqg@p42M8UpDs4oRbpeLF6WQiEakFmVbrGq3mRGtyh/rds4zpDAartQsgh0ZE4AwRR1tm0mM6P9Bv@pszMnM7a62E7WrYHWYaEl9G9YYybX1MDRXMPaHLYI0SclG14LR4GFWjvlutDSXYpOQPIKXWCDQ3PNPYoQVp4MjATytQjSFDe67lrCifc4bLf6Qm@7l2ytXM1phGml@FV/Y39vrzMPK/GqDWhrCTeKj5NjOwj1HPsHMLuNAfaUPwgW7IHnePt7NwAlfguV5SdgFJclRul1yKtlZveQxXgvELlh5nvmSnt3p8SZSr0iCBZGsgOC00vt1ByKd2Thnj@7wWTy/@2wu6cx7qjbaYsBd/TpblaawEX6UgZne9DB6jkJVNkbOTRAD/had1A58/UW0STa1Xsd5q9GzxowvsnGcIYml@2k7Rf67pWGOV6RaSJPkxPvdt3tqQojxqoBql2X/kkxl7nnLMUgMvW2AerTKdpTeyz0HL8u0Xhqt3cTbE@8uCRr7bYed06zpFHXkueG5BvdBDKL0LZES/aY5hjqY2D0e03vm/FQ7clpiDcQQbwVceqNZPdG0jgs4UZ4jQh2u4hkaOPjtuYh@G496a8ntO5oBQjHL3Do5TFAsNjTAx8QAaAlipckcsC9@/Dhvw
+
+///////////////////////////////////////////////////////////////
+// This is the start of the part of the file that should not
+// be changed. Following that part is the part you should 
+// change.
+///////////////////////////////////////////////////////////////
+
+// IsSorted(a) er satt þá og því aðeins að
+// sannað sé að a sé raðað í minnkandi röð.
+// IsSorted(a) is true if and only if it is
+// proven that a is in descending order.
+predicate IsSorted( a: seq<int> )
+{
+    forall p,q | 0 <= p < q < |a| :: a[p] >= a[q]
+}
+
+// Sannar að poki með einu staki samsvarar runu
+// með einu staki.  Dafny þarf smávegis olnbogaskot
+// til að fatta það. Þetta er gagnlegt til að sanna
+// að útkoman úr Sort sé rétt í sértilvikinu þegar
+// raðað er poka m með aðeins einu gildi x, sem
+// gefur þá rununa s == [x].
+// Proves that a multiset with one element corresponds
+// to a sequence with one value. Dafny needs a little
+// help to realize this. This is useful to prove that
+// the result from Sort is correct in the special case
+// where we are sorting a multiset m with only one value
+// x which then gives the sequence s == [x].
+lemma Singleton( m: multiset<int>, s: seq<int>, x: int )
+    requires x in m
+    requires x in s
+    requires |s| == 1 == |m|
+    ensures |m-multiset{x}| == 0
+    ensures s == [x]
+    ensures m == multiset{x}
+    ensures m == multiset(s)
+    ensures IsSorted(s)
+{}
+
+method RemoveOne( a: multiset<int> ) returns( b: multiset<int>, x: int )
+    requires |a| >= 1
+    ensures a == b+multiset{x}
+{
+    x :| x in a;
+    b := a-multiset{x};
+}
+
+// Þessi hjálparsetning er gagnleg til að hjálpa
+// Dafny að sanna að útkoman úr röðuninni sé rétt.
+// This lemma is useful to help Dafny to prove
+// that the result from sorting is correct.
+lemma LomutoLemma   ( a: multiset<int>
+                    , a': seq<int>
+                    , x: int
+                    , b: multiset<int>
+                    , b': seq<int>
+                    , c: seq<int> 
+                    )
+    requires a == multiset(a')
+    requires b == multiset(b')
+    requires IsSorted(a')
+    requires IsSorted(b')
+    requires forall z | z in a :: z>=x
+    requires forall z | z in b :: z<=x
+    requires c == a'+[x]+b'
+    ensures forall p | 0<=p<|a'| :: a'[p] in a
+    ensures forall p | 0<=p<|b'| :: b'[p] in b
+    ensures forall z | z in a' :: z in a && z>=x
+    ensures forall z | z in b' :: z in b && z<=x
+    ensures forall z | z in a' :: z in a && z>=x
+    ensures forall z | z in b' :: z in b && z<=x
+    ensures IsSorted(c)
+    ensures multiset(c) == a+multiset{x}+b
+{
+    assert |c| == |a'|+1+|b'|;
+    assert forall p,q | 0<=p<q<|c| :: q<|a'| ==> c[p]>=c[q];
+    assert forall p,q | 0<=p<q<|c| :: q==|a'| ==> c[q]==x && p<|a'| && c[p]==a'[p] && c[p] in a;
+    assert forall p,q | 0<=p<q<|c| :: q==|a'| ==> c[q]==x && p<|a'| && c[p]==a'[p] && c[p] in a && c[p]>=c[q];
+    assert forall p,q | 0<=p<q<|c| :: p<|a'| && q>|a'| ==> c[p] in a && c[q] in b && c[p]>=c[q];
+    assert forall p,q | 0<=p<q<|c| :: p==|a'| && q>|a'| ==> c[p]==x && c[q] in b && c[p]>=c[q];
+    assert forall p,q | 0<=p<q<|c| :: p>|a'| && q>|a'| ==> c[p]>=c[q];
+}
+
+// Prófunarfall sem staðfestir að Partition og Sort
+// séu áreiðanlega að virka sannanlega rétt.
+// Alls ekki má breyta þessu falli.  Athugið að
+// þetta fall skilgreinir í raun þá virkni sem
+// Partition og Sort eiga að hafa, þ.e. forskilyrði
+// og eftirskilyrði þeirra falla.
+// A test function that validates that Partition and
+// Sort are provably correct. This function must not
+// be modified. Notice that this function does in
+// fact define the functionality that Partition and
+// Sort should have, i.e. the preconditions and
+// postcoditions of those functions.
+method Test( m: multiset<int> )
+{
+    var s := Sort(m);
+    assert IsSorted(s);
+    assert m == multiset(s);
+    if |m| > 0
+    {
+        var a,p,b := Partition(m);
+        assert m == a+multiset{p}+b;
+        assert forall z | z in a :: z>=p;
+        assert forall z | z in b :: z<=p;
+    }
+}
+
+// Aðalforritið er óþarfi, en er sett hér til gamans
+// svo hægt sé að keyra eitthvað.
+// The Main function is not necessary but is put here
+// for fun so we have something to run.
+method Main()
+{
+    var x := Sort(multiset{0,9,1,8,2,7,3,6,4,5
+                          ,0,9,1,8,2,7,3,6,4,5
+                          }
+                 );
+    print x;    
+}
+
+///////////////////////////////////////////////////////////////
+// This is the end of the unchangable part of the file.
+// Following this is the part you should modify in order to
+// implement a version of quicksort.
+///////////////////////////////////////////////////////////////
+
+method Partition( a: multiset<int> ) returns ( b: multiset<int>, p: int, c: multiset<int> )
+    // Bætið við requires/ensures/decreases eftir þörfum
+    // Add requires/ensures/decreases as needed.
+	requires |a| > 0
+	ensures a == b+multiset{p}+c;
+	ensures forall z | z in b :: z>=p;
+	ensures forall z | z in c :: z<=p;
+{
+    // Forritið stofn fallsins.
+    // Þið megið nota lykkju eða endurkvæmni.
+    // Hjálparfallið RemoveOne verður væntanlega gagnlegt.
+
+    // Program the body of the function.
+    // You may use a loop or recursion.
+    // The helper function RemoveOne may be useful.
+    //...
+	var oa:multiset<int>;
+	oa,p := RemoveOne(a);
+	b := multiset{};
+	c := multiset{};
+	while oa != multiset{}
+		decreases oa
+		invariant b+c+oa+multiset{p} == a
+		invariant forall z | z in b :: z > p
+		invariant forall z | z in c :: z <= p
+	{
+		var temp:int;
+		oa,temp := RemoveOne(oa);
+		if temp > p
+		{b := b+multiset{temp};}
+		else
+		{c := c+multiset{temp};}
+	}
+}
+
+method Sort( m: multiset<int> ) returns ( r: seq<int> )
+    // Bætið við requires/ensures/decreases eftir þörfum
+    // Add requires/ensures/decreases as needed.
+	ensures m == multiset(r)
+	ensures IsSorted(r)
+{
+    // Forritið stofn fallsins.
+    // Þið munið vilja nota endurkvæmni.
+    // Hjálparsetningin LomutoLemma
+    // verður væntanlega gagnleg.
+    // Hugsanlega viljið þið einnig
+    // nota hjálparsetninguna Singleton.
+
+    // Program the body of the function.
+    // You will want to use recursion.
+    // The lemma LomutoLemma will be
+    // useful. Perhaps you will also
+    // want to use the lemma Singleton.
+    //...
+	if |m| == 0
+	{return [];}
+	if |m| == 1
+	{
+		var q :| q in m;
+		Singleton(m,[q],q);
+		return [q];
+	}
+	assert |m| >= 2;
+	var recb:multiset<int>;
+	var recc:multiset<int>;
+	var rcp:int;
+	recb,rcp,recc := Partition(m);
+	var nsb := Sort(recb);
+	var nsc := Sort(recc);
+	r := nsb+[rcp]+nsc;
+	LomutoLemma(recb,nsb,rcp,recc,nsc,r);
+}
