@@ -1,0 +1,403 @@
+// Author of question:   Snorri Agnarsson, snorri@hi.is
+
+// Author of solution:     eti2
+// Permalink of solution:  https://tio.run/##3VpLbxzHET6Tv6JzSUhwvNbSeZKiEMWxAx@cGLaAIBB46Nnt3W3tPJbdM0uuRP6VALwIyMGAAAM6CIgu88Ocr6of89hdGrKdQ0LI3pnuqn5U1@Or6pnKWbH5/vuPPxZP62pRGlHOxFWtbKXL4kwI8U1RGqPF03khjbVlkQjLLX9c6JG2h4c9RltmdWAUQlX6lPq/UiaXmS6WA5LRaET8P@mPxn@20FbgX7VQwlbSVDQPvaw6zzOdKTzISthFWWdTUZQVMadKTBaymKvpSHxeZll5rYu5I2R2Py4/b8o6cBOr4xv95C3QWF/Yb0pTqemRPBbKCCurSjTvm3tRzvG7br4VsnmjdGHplxisLAo8Ctv8i5qE5CeDR3oD/VreyGKqhWneNm9GwzloW6ZWQs8EqERZZBt61rRhol2Zcq0KJwdJ1LoQ0k4URoR4SjNVZnS4MmqqJ7JS7dBCngmrrh7ronoijg9fHZIizEojs0yskitxKx6JxxdiJR6LK/x3K2/F2ZmQz1eX1CyfX10e3gWBqHmuCl5vkv5IqTRvMe9cZ5ADEVN7TRP129PRzhk/SEYYby0zGA5LSkijeEO95nQgsjhdT2qJSHfI8MgL8WVyDSG@dLP88pfimgcmIb6kCa@P0dhjGEidJA42fucTSHsnkOIEjv0RuCP97KqWmXUSYfGaRMw2RpugbBJPdVEbYpF0Mil8hMqxrkIvZDaF1GUuxapcSha5TPhomAejEZsytXgBRyTNaPfELGrrRI19wYsQhbDwVMVEWTc1HVLqaCZlUUldOJcgcyXyOqu0VewO3IEkxMTETKT8UHxyiqYeHWYqx8J7q@me1PCgSOoGrNpgmDAhGdvFRfuaDug6Rrmnw3OowtbULmm41GsFqSa9P7/kV9dIf9JaBY9Fp4vuR@L2Fkf76JKUpbOy80hvVIXTcO93Yej0waFlO7QcDp0@OLQfYS@X79@74MBP82OQ0Wh8eSKfj0ejyz4/S8r3p9v9PL8j6Xe0EzJT/wDl8Ufh@RWNcLebNd3BmnZY05a1r@7Ml3j282CKMmc/XsNEZmTVZGCIYFLk8IZwYehdom0qZ81rY7OaraoQarlkD2dkXaxhZZma17lo3lVG6WUBV463QkHJ19o7UDjInO2TRy@af4NFEse8uZ/VQs7EnwkxsJ0@Fbkyc8TWuphQTPe2JwuKqrWFgeL0jJKADZiKo21d0cBsw@jIYKj5qq4kcVtRF5myVlwrMkIiry1FGwlSRJ5KYAeWpinjIuLMX9JCPq@Lhwy0fWaxT9WE1gaTgiqfwFK2bIo8QxH1OHVmmFnVsY0@ieyRsH49dvrVp3tOXZcncdHh0I8jf0uaDkiDakTNIJfMJ9alga9e6oxcc/OvqqpdrOND@5x9dw42PllIHEG9NhRfm/eMJOp59qL5zlaJVyKWNXUawDfSt8WL5j5biUpnPC9HBcdMHLmiwPveqJW0zduiqIuRaP4J/YIhFDV@1jp7IcUSagyue2Jp3uPcpR8XOFNVrJtCzdBFnOlmPqffzXLpIoaNBoEhBO9guW5e54Xb5FedeNEXi/NGDOoYwwHLqknlYgIhQCMWNYRD2gmMQ3QMLom2TNe6rC0rsZNJodSUPHKmqwrwcqFIKmXEBo7ZKbHGEllVR@IfgJHXGkZ8re2Co1AJo8E7k7ugA/UhtJlCP@nBOEvjVdDaJjVbQghRYYt/L83ygRiViMlWwNq2gh8XnmLHhAyjJ/Ne@IrOcDJ0qyfDGBlY4lSTQST8xQUMEGAmDQ9kVo8vUufXn4jJxUUID/tM7cGhnvSGSreGiqa45Tgo3PrHVyEAtnG16xgGwbV/kmGxySSEg0AHfSFBx/d2BPrrCPl8T4ffzNbAu6g6R/Oh9D6CnuxEBj1e@dN5T36Qo438HXqGEftG3jPYXQfORH@99xi9ovwPH2NXDA/ypj@Bt085HOeDeU92crTgskPDMPBHqsBWHEamo10URGpaU0kC7whYdi2NT5ZinGwpRmIr0K7VHAGhzIq0nEu7dAWLEHVnSIZ91KX4qugNMXwu5xTYq3505gSJwvK7allSeGveGcadrmpAGIFgIl4M@NZ6SctCVJ67aBvKChif07jcLT4k37wJl03fcO5HPHM1q43L1mnHQAiWPeLN5VaElm16dq2rBUIcUjBENsJ8HKDtqiym1odKGZO1ltqH711RmbiKegqYCl7CnPqlC8yjWDgCVJ3VGfWHsC2dqJEYYnKsTcxMmTuBgT6AhpBgrtREE5ZFGCW264VCDulQLGeqDsTGPeZh3dmmXTwx3oBVTxaMFSFPJ582N@0I0GemGDhTVQnUm5/F8X2ot924f3OGxVbDHPWGs6sdbbbfdms51RvT/27z217kvM3bnObmzqWEPYKw6D4K6MZ@8O3vPLJ7wADaXznT@/yFNFnzeg5YW62bt6Gu884pK@zqLxSAKXsgCBkMhHHnt@KbFdREUE4FJWbN/FrlTjWvy1C74dNvT3AkPo05DhSHmLwq@NF8VjI6zFW1KKd@yGfXJWOz3kGJCEmPCKoNDtGdWyI2O8@PUvAnF@J0R33gpBVusrnzACUVZzHS3YizW3fY3u9xZ9o9zF5iS5UEzDV2jRvi3jzAvbkLqetXpvlu1stb4e6aNzMqMTt/6YRWztm@QhIKWI8cFW7HpSmS8wazlM6fuUb2Wy4TzTLrkl3KT1KjNuwbkVXU7myhBU@rRc1JhM9T0E0@0y0LydIc8xVYkk@XneuiOQsdfFpvpXB7fmELOZMJ6EdwQchsabCNad5ohutzZDHYaWykebUxbmLp8@gK0hik0VA9PZVV8JFuallMQ4GMvQv5K5nCj3iX5H1aHCmvbdWpdOflVM80lbr/WlZ6okL9q8syLblYSRwzCSc3VTNdKFdD9zRYWbXZtyxfIF/ItUqEJpFw/Ryrgw/XLtH39KvSVpMyNHKhvrTtNDbazzOI54iMYWA6Xq/XFHgTVkFez9HNoFB0wmD8ptd4BOu5uIBaHxNaj28n48D7cw9Iq5zwkBDTcMRBWtQfuZMABat6CsvIZnQRU2kXmJvvGDjohOs@BiqLmL5AQGckMJeI@hxB7bpE8@t5FYvkS7WBOipEy8Va@ruCZzizL6mCGvUCOkKVm0JNKFc3G06D0bjCDwU8Vhikz2BA0KPwRyqARzpDvlMpCQjEM6XRj7oneBNlE73Io@QPyTj5fXKa/C75JPlt8uvkNz2M1v9LPoz8brvPn8nKkLO9OadnJ@@f9Y5K0WWCu5WCcOkSCSa8fVvlqjWdK6l2hOFtFNs1u2O@mfE1CJ2vHIiioNCpnbmiHQGTn@fuqlfcWcI9w9f5Ig8XEb2jtcMaJkVf8hjd4PuUUDQggGJP7Yo/agNlD97cXfvgX9H8my4mQ2Uy9@CP/D@Xlnhl9zETIxZSdJvV0H6id9ZjK3VTOTcc6zK53MBZXksoAZQWQd4J38nNq28I@LQB18Rj/A2N5lq7qg0NBP8JiOZHSNVE0nBcFu2WNMn7EbvbQ2DlolDcAJjUjZrUFWuLLWsDBw73qVqTItKHKqAt1Jjsv7n44BuJffWZPRlUD90NWHYUj5yDYFMI3s5W5azwl1CdKD4KlE4h54qJSQXxk22Wyxe1UKRK/XKhZ/oG3rDbQYw16yClY2pUjdYjdpdp87qSgYvq5uJXsYj2K7HMcMI1adsCD7wuqymUeYbw20UjXs@9BRXNa1tRlb4LgOLW3tcwHue2fQF1q2xaROpeGUIwnKGUbc4Xw7Zia8RE3wZ6Fqzev@jPQj0WstGtUBkpKaqczq102SdhLM80WB7UuHvhQRZAUMkTe3QeZo4T62JGV4mGc9x4PdE7L4S9zqzc79YH7PdlXQRZb4nto7h7t0CEon2S8jl1YHDWSnrGqBSos6h8Eb25B8qFnyfg6KnT5p0P1ZyWL@UKbid0Ih2eG0lJRlpONxxIvc9xrsWTkYui@xVyItheWa4E36TEerCn@2LWNvoMdxrdCuXHgZDy6ekUY3V1eJKxl0IfVcnDMXJBPASo/roCDVClx5Sb4EtllgPliQlwDAJ@tonng0V0Ct9K7KhkB1oqEawAdY2mi/NVJifuPp3YSFzDZXzhiucdIXFGHWeJJt/VQ5JMTOm2RmSoYzmimhAUWgljy0VcLM84opxP5amj5k3y1AjFVaSkPa16mwItXyKwZkUfg8R1tgmftwQJLyTFE9XOO1lotQa2DzpFn9cc6JlHoo/owwA8p/x8ePDKhQLx/PL8jskcVduRhva03y6pvQN5xRPRjs0v54cHhOeqcVKdJtUn5zwM17yf@Jr3wavDg4NqTIDP3W@d0/sp55D@nvbgoF9DdaNR/Q2UnxCli3YSzdzI0Loan/CEWCJXZbsTyf5E8sGJ5NZEcfbhRCzucApfN/fNG/aA3s6z5j6kotqVJ5b88Ulzv8c/Sq5U@MoeMPq3CAGW4BMy5zk0wUb9QYzx0Cnhyh2VETkvVjvd9OgHvDgWrFo3yyVGcs2ynXCu5gXdDvNHHmJm2E0WtgIMI89IWYXRrU9zRiOna20ZskC5AYVYj6m2MgvQNtCTlVi63/KWkrqsM8MKhE8hFq31LGA@gA1dP4DUx9fi3Jc6cAKBuvUFox3ugT/piWfYMfPKSEJoKn5dwpWgDBk9YWxPb/R8UTnpbtX9kx6YOd5x4T/ZIvEF5aVeUYUkfEajXekVh16tVeECDbrmoeQsTaHd1SgUhYq8BI35y5qiXC7JcqmcXBT8oQ2FtO8An0ZtVYOESJ/NcL5QzroFSxIxDuy65trksDZKBxNI3ecz7NhudA5fRSXOmfuehtemX7Zw1aXWOypig09HrNgujW3lbny3@TDJcTiwPwHBaS4o0XdIHt5@7DHox@2NKBduCN28NUgYInJDvBwyIVPniEbu9yC0pScMZ2Xb4tzv7SSUCPzbyfj/DebGzZB/AmssgPauKKg68f8GgZ7Fns6m2zsGqpSMXHyUn642Z33Nd@XZAy48xSLIHVomWy00wuosLcuMw5GpFRqvF/SVKw0sftGlR9RqtZq60aALDKEpx3XfUaH1BBrb6zny34@RxrpYykABpL7wfMCNvBgzPsMezuPraXwl@sSME8Nxt62FUztHVLfhTs3ajO@4nbc96bSfuvb@121YHbXSLl3Qd4uK36nxci@4du0Xd0Xl6yv@hhKdbXPeE/OVm6y9ZeGNPL@6TK6O48b4zPD70VXe3Yp/C/VCIrwYnODBQfgyjtceLhK/dp9UDtz@ZuYr08gR3eUbVyNcESf4U6qdPXDB4NzoIO3/r7jDDlPHMXZgaae/9Y6DGkGnp1t5@BGO8jNAMt0FZdvJo3NFA0/0Q67IAZxCQroy284KnK33wXj4anI3AGctdYY2UFNSko4idrQwDHN16eBo5/NMMtHgKsbJ6rStZ8sA0u04Vl1X49h42jYyuE5bGGzHiT1lkPL99/8B
+
+///////////////////////////////////////////////////////////////
+// This is the start of the part of the file that should not
+// be changed. Following that part is the part you should 
+// change.
+///////////////////////////////////////////////////////////////
+
+// IsSorted(a) er satt þá og því aðeins að
+// sannað sé að a sé raðað í vaxandi röð.
+// IsSorted(a) is true if and only if it is
+// proven that a is in ascending order.
+predicate IsSorted( a: seq<int> )
+{
+    forall p,q | 0 <= p < q < |a| :: a[p] <= a[q]
+}
+
+// IsSegmented(a,b) er satt þá og því aðeins að
+// sannað sé að öll gildi í a séu <= öll gildi í b.
+// IsSegmented(a,b) is true if and only if it is
+// proven that all values in a are <= all values in b.
+predicate IsSegmented( a: seq<int> , b: seq<int> )
+{
+    (forall z,w | z in a && w in b :: z <= w) &&
+    (forall p,q | 0 <= p < |a| && 0 <= q < |b| :: a[p] <= b[q])
+}
+
+// SortedEquals(a,b) sannar, fyrir raðaðar runur
+// a og b, sem innihalda sama poka gilda, að runurnar
+// eru jafnar.
+// SortedEquals(a,b) proves that for sorted squences
+// a and b that contain the same multiset of values,
+// that the sequences are equal.
+lemma SortedEquals( a: seq<int>, b: seq<int> )
+    requires multiset(a) == multiset(b)
+    requires IsSorted(a)
+    requires IsSorted(b)
+    ensures a == b
+{
+    if a == []
+    {
+        assert |b| == 0 || b[0] in multiset(a);
+        return;
+    }
+    if b == []
+    {
+        assert |a| == 0 || a[0] in multiset(b);
+        return;
+    }
+    assert a[0] in multiset(b);
+    assert b[0] in multiset(a);
+    assert a == a[0..1]+a[1..];
+    assert b == b[0..1]+b[1..];
+    assert a[0] == b[0];
+    assert multiset(a[1..]) == multiset(a)-multiset{a[0]};
+    assert multiset(b[1..]) == multiset(b)-multiset{b[0]};
+    SortedEquals(a[1..],b[1..]);
+}
+
+// Samröðunarfall sem nota má í röksemdafærslu
+// en ekki í raunverulegum útreikningum nema við
+// séum að nota nýlega útgáfu af Dafny.
+// A merge function that can be used in reasoning
+// but not for real computations unless we are
+// using a recent version of Dafny.
+function MergeFun( a: seq<int>, b: seq<int> ): seq<int>
+    decreases |a|+|b|
+{
+    if a == [] then
+        b
+    else if b == [] then
+        a
+    else if a[0] <= b[0] then
+        [a[0]]+MergeFun(a[1..],b)
+    else
+        [b[0]]+MergeFun(a,b[1..])
+}
+
+// Sannar að MergeFun(a,b) skilar réttu gildi.
+// Fyrir mannlega lesendur er það augljóst,
+// en Dafny þarf smá hjálp til að sanna það
+// með þrepasönnun. Þið munuð vilja kalla á
+// þessa hjálparsetningu ef þið byggið ykkar
+// samröðun á endurkvæmni.
+// Proves that MergeFun(a,b) returns the
+// correct value. For human readers this is
+// obvious but Dafny needs a little help to
+// prove this using induction. You will wish
+// to call this lemma if you base your merge
+// on recursion.
+lemma MergeFunWorks( a: seq<int>, b: seq<int>, c: seq<int> )
+    decreases |a|+|b|
+    requires IsSorted(a)
+    requires IsSorted(b)
+    requires c == MergeFun(a,b)
+    ensures multiset(c) == multiset(a)+multiset(b)
+    ensures IsSorted(c)
+    ensures a!=[] && b!=[] && a[0]<=b[0] ==> c==a[0..1]+MergeFun(a[1..],b)
+    ensures a!=[] && b!=[] && a[0]>=b[0] ==> c==b[0..1]+MergeFun(a,b[1..])
+{
+    if a == [] || b == [] { return; }
+    if a[0] <= b[0]
+    {
+        MergeFunWorks(a[1..],b,c[1..]);
+        calc ==
+        {
+            multiset(c);
+            multiset(c[0..1]+c[1..]);
+            multiset(c[0..1])+multiset(c[1..]);
+            multiset(c[0..1])+multiset(a[1..])+multiset(b);
+            multiset(a[0..1])+multiset(a[1..])+multiset(b);
+            multiset(a[0..1]+a[1..])+multiset(b);
+            assert a[0..1]+a[1..] == a;
+            multiset(a)+multiset(b);
+        }
+    }
+    else
+    {
+        MergeFunWorks(a,b[1..],c[1..]);
+        calc ==
+        {
+            multiset(c);
+            multiset(c[0..1]+c[1..]);
+            multiset(c[0..1])+multiset(c[1..]);
+            multiset(c[0..1])+multiset(a)+multiset(b[1..]);
+            multiset(b[0..1])+multiset(a)+multiset(b[1..]);
+            multiset(a)+multiset(b[0..1])+multiset(b[1..]);
+            multiset(a)+multiset(b[0..1]+b[1..]);
+            assert b[0..1]+b[1..] == b;
+            multiset(a)+multiset(b);
+        }
+    }
+}
+
+// Sannar að poki með einu staki samsvarar runu
+// með einu staki.  Dafny þarf smávegis olnbogaskot
+// til að fatta það. Þetta er gagnlegt til að sanna
+// að útkoman úr Sort sé rétt í sértilvikinu þegar
+// raðað er poka m með aðeins einu gildi x, sem
+// gefur þá rununa s == [x].
+// Proves that a multiset with one element corresponds
+// to a sequence with one value. Dafny needs a little
+// nudge to realize this. This is useful to prove that
+// the result from Sort is correct in the special case
+// where we are sorting a multiset m with only one value
+// x which then gives the sequence s == [x].
+lemma Singleton( m: multiset<int>, s: seq<int>, x: int )
+    requires x in m
+    requires x in s
+    requires |s| == 1 == |m|
+    ensures |m-multiset{x}| == 0
+    ensures s == [x]
+    ensures m == multiset{x}
+    ensures m == multiset(s)
+    ensures IsSorted(s)
+{}
+
+// Fjarlægir tvö gildi úr poka.  Getur verið gagnlegt
+// í Split fallinu.
+// Removes two values from a multiset. Can be useful
+// in the Split function.
+method RemoveTwo( a: multiset<int> ) returns( b: multiset<int>, x: int, y: int )
+    requires |a| >= 2
+    ensures a == b+multiset{x,y}
+{
+    b := a;
+    x :| x in b;
+    b := b-multiset{x};
+    assert |b| >= 1;
+    y :| y in b;
+    b := b-multiset{y};
+}
+
+// Prófunarfall sem staðfestir að Split og Sort
+// séu áreiðanlega að virka sannanlega rétt.
+// Alls ekki má breyta þessu falli.  Athugið að
+// þetta fall skilgreinir í raun þá virkni sem
+// Split og Sort eiga að hafa, þ.e. forskilyrði
+// og eftirskilyrði þeirra falla.
+// A test function that validates that Split and
+// Sort are provably correct. This function must not
+// be modified. Notice that this function does in
+// fact define the functionality that Split and
+// Sort should have, i.e. the preconditions and
+// postcoditions of those functions.
+method Test( x: multiset<int> )
+{
+    var a,b := Split(x);
+    assert a+b == x;
+    assert (|a|==|b|) || (|a|==|b|+1);
+    a,b := Split(x);
+    assert a+b == x;
+    assert (|a|==|b|) || (|a|==|b|+1);
+    var c := Sort(x);
+    assert multiset(c) == x;
+    assert IsSorted(c);
+}
+
+// Aðalforritið er óþarfi, en er sett hér til gamans
+// svo hægt sé að keyra eitthvað.
+// The Main function is not necessary but is put here
+// for fun so we have something to run.
+method Main()
+{
+    var x := Sort(multiset{0,9,1,8,2,7,3,6,4,5
+                          ,0,9,1,8,2,7,3,6,4,5
+                          }
+                 );
+    print x;    
+}
+
+///////////////////////////////////////////////////////////////
+// This is the end of the unchangable part of the file.
+// Following this is the part you should modify in order to
+// implements a version of merge sort.
+///////////////////////////////////////////////////////////////
+
+// Þið munuð kannski vilja nota þetta samröðunarfall í Sort fallinu.
+// Annars megið þið eyða þessu því í nýrri útgáfum Dafny má kalla
+// á MergeFun í keyrsluhæfum forritstexta.
+// You will maybe want to use this merge method in the Sort method.
+// Otherwise you may delete this because in recent versions of
+// Dafny you may call MergeFun in executable source code.
+method Merge( a: seq<int>, b: seq<int> ) returns( c: seq<int> )
+    requires IsSorted(a)
+    requires IsSorted(b)
+    ensures IsSorted(c)
+    ensures multiset(a)+multiset(b) == multiset(c)
+    ensures c == MergeFun(a,b)
+{
+    // Forritið stofn fyrir þetta fall.
+    // Þið getið notað lykkju eða endurkvæmni.
+    // Sé endurkvæmni notuð þarf e.t.v. að bæta
+    // við 'decreases' klausu í haus fallsins.
+    // 
+    // Athugið að þið munuð næstum áreiðanlega
+    // þurfa að kalla á hjálparsetninguna
+    // MergeFunWorks á viðeigandi stöðum í
+    // stofni fallsins.
+    // 
+    // Ef þið notið lykkju þá er hugsanlegt að
+    // hjálparsetningin SortedEquals verði
+    // gagnleg.
+    //
+    // Einfaldara er að nota endurkvæmni en að
+    // nota lykkju.  Munið að kalla á hjálpar-
+    // setningar á viðeigandi stöðum til að
+    // Dafny geti sannreynt það ástand sem
+    // búið er að skapa.
+
+    // Program a body for this method.
+    // You can use a loop or recursion.
+    // If recursion is used you may need
+    // to add a 'decreases' clause to the
+    // header of the method.
+    //
+    // Note that you will almost certainly
+    // need to call the lemma MergeFunWorks
+    // at approriate places in the body.
+    //
+    // If you use a loop then the lemma
+    // SortedEquals may be useful.
+    //
+    // It is simpler to use recursion than
+    // a loop. Remember to call lemmas at
+    // appropriate places to help Dafny
+    // verify the state that has been
+    // achieved.
+
+    //...
+	if (|a|==0) && (|b|==0)
+	{return [];}
+	if |a|==0
+	{return b;}
+	if |b|==0
+	{return a;}
+	assert (|a| > 0) && (|b| > 0);
+	var t1,t2,t3;
+	if a[0] >= b[0]
+	{
+		t1 := [b[0]];
+		t2 := b[1..];
+		MergeFunWorks(t1,t2,b);
+		t3 := Merge(a,t2);
+		c := t1+t3;
+	}
+	else
+	{
+		t1 := [a[0]];
+		t2 := a[1..];
+		MergeFunWorks(t1,t2,a);
+		t3 := Merge(t2,b);
+		c := t1+t3;
+	}
+	
+    
+    // Ráðlegt er að láta þessi tvö köll á
+    // hjálparsetningar vera það síðasta sem gerist
+    // í fallinu, sérstaklega ef þið notið lykkju.
+    // Ef þið notið lykkju er einfaldara að ferðast
+    // gegnum a og b frá vinstri til hægri.
+
+    // It is advisable to let the two following
+    // calls on lemmas be the last thing that
+    // happens in the body, especially if you
+    // use a loop. If you use a loop it is 
+    // simpler to traverse a and b from left to
+    // right.
+    MergeFunWorks(a,b,MergeFun(a,b));
+    SortedEquals(c,MergeFun(a,b));
+}
+
+// Skiptir innihaldi poka í tvennt þannig að pokarnir
+// sem koma út eru nokkurn veginn jafn stórir.
+// Split the contents of a multiset in two wuch that
+// the resulting multisets are approximately of equal
+// size.
+method Split( a: multiset<int> )
+        returns ( b: multiset<int>
+                , c: multiset<int>
+                )
+    // Bætið við requires/ensures/decreases eftir þörfum
+    // Add requires/ensures as needed.
+	ensures b+c == a
+	ensures (|b|==|c|) || (|b|==|c|+1)
+{
+    // Forritið stofn fyrir þetta fall.
+    // Þið getið notað lykkju eða endurkvæmni.
+    // Sé endurkvæmni notuð þarf e.t.v. að bæta
+    // við 'decreases' klausu í haus fallsins.
+    //
+    // Fallið RemoveTwo er gagnlegt hér.
+
+    // Program a body for this method.
+    // You can use a loop or recursion.
+    // If recursion is used you may need
+    // to add a 'decreases' clause to the
+    // header of the method.
+    //
+    // The method RemoveTwo is useful here.
+	var aCpy:multiset<int> := a;
+	b := multiset{};
+	c := multiset{};
+	var p:bool := true;
+	while aCpy != multiset{}
+		decreases aCpy
+		invariant a == aCpy+b+c
+		invariant (|b| == |c|)
+	{
+		if |aCpy| >= 2
+		{
+			var r1:int;
+			var r2:int;
+			aCpy,r1,r2 := RemoveTwo(aCpy);
+			b := b+multiset{r1};
+			c := c+multiset{r2};
+			assert |b| == |c|;
+		}
+		else
+		{
+			assert |aCpy| == 1;
+			var q :| q in aCpy;
+			var qm := multiset{q};
+			Singleton(aCpy,[q],q);
+			aCpy := aCpy-qm;
+			b := b+qm;
+			assert aCpy == multiset{};
+			return;
+		}
+	}
+}
+
+// Raðar innihaldi poka yfir í runu með mergesort.
+method Sort( a: multiset<int> ) returns ( b: seq<int> )
+    // Bætið við requires/ensures/decreases eftir þörfum
+    // Add requires/ensures/decreases as needed.
+    //...
+	decreases a
+	ensures multiset(b) == a
+	ensures IsSorted(b)
+{
+    // Forritið stofn fyrir þetta fall.
+    // Eðlilegt er að nota endurkvæmni hér.
+    // Program  a body for this method.
+    // It is natural to use recursion here.
+    //...
+	if |a| == 0
+	{return [];}
+	if |a| == 1
+	{
+		var q :| q in a;
+		Singleton(a,[q],q);
+		return [q];
+	}
+	assert |a| >= 2;
+	var p1,p2 := Split(a);
+	var s1 := Sort(p1);
+	var s2 := Sort(p2);
+	b := Merge(s1,s2);
+}
