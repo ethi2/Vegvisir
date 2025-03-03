@@ -1,0 +1,173 @@
+// Author of question:  Snorri Agnarsson, snorri@hi.is
+
+// Author of solution:       eti2
+// Permalink of solution:    https://tio.run/##1VXNbttGED6LTzH2IZBgmY7Um2wFDYIGCZKmQVz0IuiwJVfkxtRS3l06EiQ9TC4FcgjgU15AD@bODilyKcmq7aqHGrCw/Hbn79uZb0M2krO7u7MzeJmZOFWQjuA649qIVPYALmWqlICXkWRK61S2QRPycyx8oT2vZqfTJCvs6I8b0bUnPnI1ZomQV1uHfN8nH@@S1VclVrfA8H9kAxgGVwnTTEp4K82lYcHVq5gJmZ9/LaTQMUxUGik2HgsZgYk5BGiht84bxYQpUW/u2chRnGoDN0zlK82ve4A/F0KaFxsHPvGJspvmIv3zMw9w3zkwUTwUATMc/sASw2bLK4oHxVmoMS2h2@Qit6rOv9W/jCdmts@i2rjOhOJ6KwaXOrN46Qsu@v0XZUn9/mBIZ@lnzPGiQviY6bgJ0x5gqVC5GqehGAn@tPgFDs@ewQi/46Y1P02TkBatbYN1htDvgz22/m6dDKY7Uk4n6Fxxkymp4VDJlxtlMkd9KAj7T4ob@P5ivV6cdobbltMtkw2DpeeFzDAzm3Cg/oY@fBAJLOBVKnUTWWkT3PK8USYDO2hwya9/GxFKzOVmLafd84kYMxPEmAF9BExzcozdVFBCEEWJ26ZFG/HwxHFuKD23wT/xG640p7DraG2YVR94hXnwxXRhS1/MFkgzIagCLElAYGnPsatxcUGnej2YDsTQnp4NEDjtnIqhDVzW@wbHqAmBUymG8mo3HtirxvJqpQf3lBnXvP/ORFL3Tot/4d9Y/zukC/jUcBnqTemymrSO/1gpImhebqCUvll9U@hSGvSqr0QSKY7iKqMMVl9hxLRhM7W6JSBi@Az4rvGH1FjVLm8a0shpNzDYQFbRS7/MNY5vuFz9pSBOmA2A9SpYfYdk9SNKOMXH4DIUvteoWsnpt6DVLmXDa5ydveOr28@M3ER8Ng7hePVjlEXHFHOZMxUg8UZlgUnVg2Vsbolb7h/zYkYqZgPoUQecl4j1ZcH5ssJKFz3r4tzN9GEPxeGeCDf1ft68eTZPeT8e/XJs4cRWIYYks094Qtw@v7c5Gnac3vfyhsVroNGctoPWudegS3yPC/ee1msb5vw@jh71YB38qTogmwd4s/KraEwteaTNFbckpvS5i@HN2Gu2cUIKnl8zO8mzGte6VwpmQfg603ym9U7Qr2hZ72jfpbNCq3nMG0zbnCX/UlfvJlZVJforIY6Ak9Gg0@62fyrqIrRj4bIqZ6O7Y@NLLBKOnuq9EPIA9UFjqgu9KFEh0Y1AmccY/mabOJvdPZvNue4sT9CeuIKjI4t0Een69aaqTAp2O/90wPVQjS3akdrowfNhq1JNPL0TthTpQcf3a3OZs3SEvraF1OWq45e99v9mzfYLDZulzwpRRdFEWRmabgLHcLyLse4OxvYW7dLZ3UvnAwvoPr6A5d3d3w
+
+// Klárið að forrita klasann IntStackChain.
+
+// Finish programming the class IntStackChain.
+
+trait IntStack
+{
+    ghost var ghostseq: seq<int>
+    ghost var Repr: set<object>
+
+    ghost predicate Valid()
+        reads this, Repr
+
+    predicate IsEmpty()
+        reads this, Repr
+        requires Valid()
+        ensures IsEmpty() <==> ghostseq==[]
+    
+    method Push( x: int )
+        modifies this, Repr
+        requires Valid()
+        ensures Valid() && fresh(Repr-old(Repr))
+        ensures ghostseq == old(ghostseq)+[x]
+    
+    method Pop() returns ( x: int )
+        modifies this, Repr
+        requires Valid()
+        requires ghostseq != []
+        ensures Valid() && fresh(Repr-old(Repr))
+        ensures ghostseq == old(ghostseq[..|ghostseq|-1])
+        ensures x == old(ghostseq[|ghostseq|-1])
+}
+
+datatype Chain = Nil | Cons(int,Chain)
+
+function SeqOfChain( x: Chain ): seq<int>
+{
+    match x 
+    case Nil => []
+    case Cons(h,t) => [h]+SeqOfChain(t)
+}
+
+predicate IsReverse( x: seq<int>, y: seq<int> )
+{
+    |x| == |y| &&
+    forall i | 0 <= i < |x| :: x[i] == y[|x|-1-i]
+}
+
+function Head( c: Chain ): int
+    requires c != Nil
+{
+    match c
+    case Cons(h,t) => h
+}
+
+function Tail( c: Chain ): Chain
+    requires c != Nil
+{
+    match c
+    case Cons(h,t) => t
+}
+
+class IntStackChain extends IntStack
+{
+    var c: Chain
+
+    ghost predicate Valid()
+        reads this
+    {
+        // Hér vantar skilgreiningu á fastayrðingu gagna.
+        // Notið IsReverse og SeqOfChain til að skilgreina
+        // hvenær hlaðinn er í löglegu ástandi.
+	IsReverse(SeqOfChain(c),ghostseq)
+	//Keðjan er geymd "öfug"
+    }
+
+    constructor()
+        ensures Valid() && fresh(Repr-{this})
+        ensures ghostseq == []
+    {
+        c := Nil;
+        Repr := {};
+        ghostseq := [];
+    }
+
+    predicate IsEmpty()
+        reads this
+        requires Valid()
+        ensures IsEmpty() <==> ghostseq==[]
+    {
+        c == Nil
+    }
+    
+    method Push( x: int )
+        modifies this
+        requires Valid()
+        ensures Valid()
+        ensures Repr == old(Repr)
+        ensures ghostseq == old(ghostseq)+[x]
+    {
+        //Keðjan er geymd "öfug"
+	var L:Chain := Cons(x,c);
+	c := L;
+	ghostseq := ghostseq+[x];
+    }
+    
+    method Pop() returns ( x: int )
+        modifies this
+        requires Valid()
+        requires ghostseq != []
+        ensures Valid()
+        ensures Repr == old(Repr)
+        ensures ghostseq == old(ghostseq[..|ghostseq|-1])
+        ensures x == old(ghostseq[|ghostseq|-1])
+    {
+	x := Head(c);
+	c := Tail(c);
+	ghostseq := ghostseq[..|ghostseq|-1];
+    }
+}
+
+method Factory() returns ( s: IntStack )
+    ensures fresh(s)
+    ensures fresh(s.Repr)
+    ensures s.Valid()
+    ensures s.IsEmpty()
+{
+    s := new IntStackChain();
+}
+
+method Main()
+{
+    var s := [1,2,3];
+    var s1 := Factory();
+    var s2 := Factory();
+    while s != []
+        decreases |s|
+        invariant s1.Valid()
+        invariant s2.Valid()
+        invariant ({s1}+s1.Repr) !! ({s2}+s2.Repr)
+        invariant fresh(s1.Repr)
+        invariant fresh(s2.Repr)
+    {
+        s1.Push(s[0]);
+        s2.Push(s[0]);
+        s := s[1..];
+    }
+    while !s1.IsEmpty()
+        decreases |s1.ghostseq|
+        invariant s1.Valid()
+        invariant s2.Valid()
+        invariant ({s1}+s1.Repr) !! ({s2}+s2.Repr)
+        invariant fresh(s1.Repr)
+        invariant fresh(s2.Repr)
+    {
+        var x := s1.Pop();
+        print x;
+        print " ";
+    }
+    while !s2.IsEmpty()
+        invariant s2.Valid()
+        decreases |s2.ghostseq|
+        invariant fresh(s2.Repr)
+    {
+        var x := s2.Pop();
+        print x;
+        print " ";
+    }
+}
