@@ -1,0 +1,75 @@
+// Author of question:  Snorri Agnarsson, snorri@hi.is
+
+// Author of solution:       eti2
+// Permalink of solution:    https://tio.run/##rVVNc9owED3bv2J7SyYOpD06wDSXntNJe@hRAYE1tiRHksNQ4LfTt8J8GFLKocwA9urtat/TW3sipmax2fT79NSEwjqyU3prpA/KmpzoxVjnFD3NjHDeW5ORj5Gvheopn6adPG@rps2LHxnUF0Y8S6dFpUx5Bur1erHGN2WUL6h2duaE1sqYGYVCUphb0hL1J9hre0HPwgXFFW5I56SbKigvw0CZMKJbcjI0zvgb1JInqxnVOeEC/9aHs9SUG3LyrVFOelrpFY3oIQal8Q3HamST7oQ0DYe81d2u2LJe33H5Dmpqnagq@k0rfFEDCZTnuB4g@TISpbbQEUOXEQzBfkCcVztZkEIPyntlZr3d2i/b0FgYarwkQZW1NeF8nBw3zkO2XprUlK9aNo9p8i5weiLvypEPSd8fkQIudj3cy7aMsdjfSXBeqEqiJH06XkiTZCLHTgoPnlbgVhlsrYQJUUEudWfFsZIsru4ALyt5EXlQkpFLgJl4kLrOwZgV4WuGWgESCfoHMSsOKvA680vUdIuNlZLlToTI4ATNtGXlZcRtBezYZY9ap@u9xb83aly@yEqOw7nJMyqjjf9l9jIU19v9gQUsacC@7xgSVa5xPWAf@H4FzIqx5dXjgELXDwSD/89ItLifWOfnzv4Z0z59SHjkFbKqpWtDvTgQGVrIdud/eDLpW9hEeC9d@ItO0drt8M1r152@XbxkZ@5B9hSUshGPNE6WW0OwndhztF8exVV4sO2pjQ7pM9sZ@2fzMsMOzOLYfJEhc0n6/aM4tMSZ1Lj3US6nZkUgoW1jArAfz0Okjj24GrsKgHnJN@1YoAu@aynwQLSDc9b3gMrHfp83tqZaoAMVXxcikBYlPONhHnkofHYASG4rTSzgxgaaWRKv9l1iBiYNPGC5qs9ImMl2BDAJxs4Nr7xuPVLZOV6T7e7gjl8VYkKcg4uyApCV97GHqO5OsQvyMItzidabzR8
+
+// Finish programminng the two methods
+
+method Partition( m: multiset<int> ) returns( pre: multiset<int>, p: int, post: multiset<int> )
+    requires |m| > 0
+    ensures p in m
+    ensures m == pre+multiset{p}+post
+    ensures forall z | z in pre :: z <= p
+    ensures forall z | z in post :: z >= p
+{
+    // The body is missing.
+    // You can use a loop or recursion.
+	p :| p in m;
+	var oa:multiset<int> := m-multiset{p};
+	pre := multiset{};
+	post := multiset{};
+	while oa != multiset{}
+		decreases oa
+		invariant pre+post+oa+multiset{p} == m
+		invariant forall z | z in pre :: z <= p
+		invariant forall z | z in post :: z > p
+	{
+		var temp:int :| temp in oa;
+		oa := oa-multiset{temp};
+		if temp > p
+		{post := post+multiset{temp};}
+		else
+		{pre := pre+multiset{temp};}
+	}
+}
+
+method QuickSelect( m: multiset<int>, k: int ) returns( pre: multiset<int>, kth: int, post: multiset<int> )
+    requires 0 <= k < |m|
+    ensures kth in m
+    ensures m == pre+multiset{kth}+post
+    ensures |pre| == k
+    ensures forall z | z in pre :: z <= kth
+    ensures forall z | z in post :: z >= kth
+{
+    // The body is missing.
+    // You can use a loop or recursion.
+    // Use the Partition method as a helper method.
+	pre,kth,post := Partition(m);
+	assert pre+multiset{kth}+post == m;
+	var wpr:multiset<int>;
+	var wk:int;
+	var wpo:multiset<int>;
+
+	if |pre| == k
+	{return;}
+	else if |pre| > k
+	{
+		assert |pre| >= 1;
+		wpr,wk,wpo := QuickSelect(pre,k);
+		//QuickSelect call picks the right amount
+		post := post+multiset{kth}+wpo;
+		kth := wk;
+		pre := wpr;
+		return;
+	}
+	else
+	{
+		assert |pre| < k;//the only thing that makes sense
+		pre := pre+multiset{kth};// |pre| does not go above k due to this, and kth is known to be the lowest thing among it and post
+		wpr,wk,wpo := QuickSelect(post,k-|pre|);
+		post := wpo;
+		kth := wk;
+		pre := pre+wpr;
+		return;
+	}
+}
