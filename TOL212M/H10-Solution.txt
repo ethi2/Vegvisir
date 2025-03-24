@@ -1,0 +1,306 @@
+// Author of question:  Snorri Agnarsson, snorri@hi.is
+
+// Author of solution:       eti2
+// Permalink of solution:    https://tio.run/##tRnLkuLI8dx8Rc0eNiBgtAMzJ/phT6xndjfCdqy9E74QHNSoaOQVEkilbqmBbx9nZj1UJZVo5mEiupEys7Ky8p1FFK7T@vPnn35i70uxyXKWrdm@5IWIs3TO2B9plucxe/@QhnlRZOmEFQT56yYO4mIwcNYVWVKqdfThIp4hxe8834ZJnP7ZIQqCgHh8jNO42LBdnj3k4XYbpw9MbDhbJWFRsH@VvOQ/16uE/7wJ4xTp7@sO7X0WxbzAHfAt2/E8xG0KJP@t@LDdiXrCfi8FC9OI/cLFhIUFe@JJgt@wBOlWQC/yciXgPGv4MzIEiP3wyPNabHDDlPOIRywuWJwCFXyv44QT6zorkTjKWJoJImQiY6sQN0prlvDtFjYE5k95LGhXBMMePBdFwP6ZCQ4cQ8FigfzLNIn/5ElNMKQG/sAtRT0@crk3qOIe@LIsJYnh2EFekp6e@D3bhQ8ctOzV5c2nO8YrwdNIoQAwOAzQNI9hzmCJmLO/g@X@gggEP2yyQhByhVzmrOD7G6QAgruBRbLLeRSvQjjNf8D20XA0UF7Bch5GBUk@Yf/mu5wQB4Me4q7s1S1LS9DZ7e0diYGKRuIR@/HHhhSMhIp9Zkf4AwqSic3n8u1leqQw5LTYpaejwAlBDDxGyf/g@6GkcwlJxFtLZikJQBZLD2X7dAHpiOziZX8k4BH5HbVMR@/RYjjaG3ZzCw83TC@DE9LTIl4GG9A@8tFsACZNcxoMrqwAAINdXfG0KHOIKm3CBkKaAzaHkwW01bVYDq4OgAMv/CUmT@Wg5EKE6Yqj/8Qh@GxBpyc3gP9mOcSRXCm1uIKMw1fodWCBgqI0jniuIz8KRQisiWcq5EKMRMTtgCPQRzHmggBw0uIo9zW8mR3nKDBCyDxzaR58Vx6l0Sl/wi8ZrozBTp8wAtV7TJmEFeGWq6zSFU5LR7Gd8hUvijCvWSzzlp2BIL9KcnX@pEl6PJqwe8hlsAqzDKUKRbzhyW5dJujQoKRUxOsaFcXzPMsL1MAF8QVEF0aWh7InpoDypWjSsp2Loz75eyLo6sobOq7oXxUz4AYYMU2aU0WGoqST4hC0L2N/LJmVIAMcR@9ye6tjqAk2EJzZOpJCbDmU4Air25BVc/aJIfctFMQ1lsRLxehC1vBvM8SVr7MkoofRqCfekUC/j8aLSolu4ok/USEZVhMKedLtxCxoB6N@RkZOGNLDeIE8CKHjGb/HBwSfrh2lQKkHxeZclHlasK/RjwEZAV/J9PZSerxhRmsXKG0xDYKlTVh1KN4gHrVa4ZHJ7UUYJ@SfbWW8Phj8SSe2ltYl6TZ75B/jvBDDHsOcBids0r7pg83IrzyXZWBbCkz@0JlAzlQNG/VP2IdQq/U32T2tNmH6INeozMcEtCvsnifZE9kt@GbBBjqHq@S9LtMI8ncqwoRFfA2NKZYOLeY934SPcVZSvxtip1xCcyXyEFJwq4FqOiWtTNksdRoptBaixE12/1/I81/bRhHGl4/ONl4S0XJ6jbgkQyEd/fNkIc3HF2sXb67gmPr8Cam94HxaasvbkyC@SfS@lPF/O5pKHm1yfwqhcJbhqJzedXQdnziy0fxE80gI5GWBUw@U9ThflQkOAThFQBTK6ULNAdYEgZkJ9GneMR3NDZ0xRcvLZRn3TRjM781E2ZojdCG/g9puNco0Md2qQrJQRK@nS4cGpGxo3nRwstmA7qXk0M0Ou4ODaix2k71uLXZQDfZOe2GI8SN32i3RT@Tzfqm68j4lme1RQfR0kao0cVtbGt6rME3Q0oe3hzLMXk/bJzVsoK/Sem5g42nn2PZMwjbgTBMMUT2UqqnB5ysTk2NxbNDJ1xfa0EbLBoOiFCMiZYe2g5wYTwqOA08nyoeV6Vkhkp2W9XhE7KsGW3k61S5HNep0G@Uu6Zc2sZI1QDrZQlNsOhhtKFBUc1RSE3kHKUYHS2exzGxI2E1Q30/4L@WEWdEB9grnmYEcLs89y1uWa8T3lwHLI8YL1NbyJZaarOE8XmyWrcAmSaHR21y76Q1AuLqB0mirX8jQymsN8OAEsuZSURhfOzgJ6@6Bn18xGX3Yl2EiTzGRoo9cqve7HXSDNDFIKvKfhkZG4YmyBNQzVcutbhZDnUE5b@6wdMXxfc6kkRfXgPyF09r5Pnbg6k4DNO65YfNtAZSXSGaRnxVKCmPSHwoxcHKKf6IetHsej3sXLtERQXL4lrHoRUPFGdhuTtvbIWYAI4eu4T7FiwCv8pWSrQTdR2bl7TNUuKW63/KIcneZJPR9gSQyQWFvd4baayzZEF5wDvw@u4OxsxaMTK04qFYP0oWZNvX5WnlIn97crXXOqy7Z2jK2wDJ8rq0uQQtIiaXJKTpbWBvjtwG6VwqkAoPTGxvlOKxMcrPfrSzYznDEYWJ4gVyQsWDOXFHDrcWHQKXhw@3hnBiWfVzlOl4lw8uYqRodG6tUyp@xVhsVateFqt3AKijdFGLLccNKjRUgLv1u4araJ/CEPbYaraalcbqZyo1kb/WuqHJXTv3H0m9Op87@hh20W3hdolIGsLQvj9MUGf9Znk3hYK64zTHGi2dZgK2TAUxqsmuHtqBWmVNSPiu3XYXJCha1ooj2a4IBFgXBdDlWhnKRCqcYk6A6bIwGGlclDdQXW/NYS7d7bGV0ryFrMiTaDtfU2qCOSl33qEeWleseK1txVndNrFqCjyFODrUz4u/n6rImTkXbtLJb3XuBgbzLszH7wJ79G2hz@yLPsdeXoO1f4FCEoSPxPwBs1uHQvJ/iYnOQ6wYx60O87UO88yD20wAvbab6dea@vnVf37mvcu1MvaofQgDq/BY0ncyWDvOZy3zmMp9ZElfykW48gS3d1lzDLAx6A5x6@IH94OxP4Tb96pWzs4dZ2nxnL/H9IrK335Xs3Xcia/RgvNpFzPoQb/sQ72zE6fPn/wE
+
+// Finish programming the class QueueCycleChain
+// by programming the bodies of the operations
+// IsEmpty, Put and Get, as well as the
+// constructor for the class.
+// Everything needed is in this file and you
+// do not need to call any lemmas or write
+// any asserts. Note that it is unlikely that
+// you can solve this problem on the tio.run
+// web page.
+
+class QueueCycleChain<T> extends Queue<T>
+{
+    var last: Link?<T>
+    ghost var cycle: seq<Link<T>>
+
+    ghost predicate Valid()
+        reads this, Repr
+    {
+        (last != null ==> last in Repr) &&
+        (forall z | z in cycle :: z in Repr) &&
+        (forall z | z in Repr :: z in cycle) &&
+        (ghostseq == ValueSeq(cycle)) &&
+        (last == null ==> cycle == []) &&
+        (last != null ==> last.ValidCycle(cycle)) &&
+        (|cycle| == |ghostseq|) &&
+        (forall i | 0 <= i < |cycle| :: cycle[i].head == ghostseq[i])
+    }
+
+	constructor()
+		ensures Valid()
+		ensures Repr == {}
+		ensures ghostseq == []
+	{
+		// Give the instance variables last, Rept, ghostseq and
+		// cycle correct values considering the data invariant
+		// and the postcondition.
+		Repr := {};
+		ghostseq := [];
+		last := null;
+		cycle := [];
+		new;
+		assert  // This assert is the same as the data invariant
+			// and is unnecessary if the constructor is
+			// correctly programmed, but if not it is
+			// helpful in identifying errors.
+		(last != null ==> last in Repr) &&
+		(forall z | z in cycle :: z in Repr) &&
+		(forall z | z in Repr :: z in cycle) &&
+		(ghostseq == ValueSeq(cycle)) &&
+		(last == null ==> cycle == []) &&
+		(last != null ==> last.ValidCycle(cycle)) &&
+		|cycle| == |ghostseq| &&
+		(forall i | 0 <= i < |cycle| :: cycle[i].head == ghostseq[i]);
+	}
+
+	predicate IsEmpty()
+		reads this, Repr
+		requires Valid()
+		ensures IsEmpty() <==> ghostseq==[]
+	{
+		Repr == {} && last == null
+	}
+
+	method Put( x: T )
+		modifies this, Repr
+		requires Valid()
+		ensures Valid()
+		ensures fresh(Repr-old(Repr))
+		ensures ghostseq == old(ghostseq)+[x]
+	{
+		last := new Link(x,last,cycle,ghostseq);
+		ghostseq := ghostseq+[x];
+		cycle := cycle+[last];
+		Repr := Repr+{last};
+	}
+
+	method Get() returns ( x: T )
+		modifies this, Repr
+		requires Valid()
+		requires ghostseq != []
+		ensures Valid()
+		ensures Repr < old(Repr)
+		ensures ghostseq == old(ghostseq[1..])
+		ensures x == old(ghostseq[0])
+	{
+		x := last.tail.head;
+		Repr := Repr-{last.tail};
+		last,cycle,ghostseq := RemoveFirst(last,cycle,ghostseq);
+	}
+}
+
+///////////////////////////////////////////////////////////////
+// Here the mutable part of the file ends.
+// Do not change the program text below this.
+///////////////////////////////////////////////////////////////
+
+// This is the fundamental definition of the behaviour of a queue.
+trait Queue<T>
+{
+    ghost var ghostseq: seq<T>
+    ghost var Repr: set<object>
+
+    ghost predicate Valid()
+        reads this, Repr
+
+    predicate IsEmpty()
+        reads this, Repr
+        requires Valid()
+        ensures IsEmpty() <==> ghostseq==[]
+    
+    method Put( x: T )
+        modifies this, Repr
+        requires Valid()
+        ensures Valid() && fresh(Repr-old(Repr))
+        ensures ghostseq == old(ghostseq)+[x]
+    
+    method Get() returns ( x: T )
+        modifies this, Repr
+        requires Valid()
+        requires ghostseq != []
+        ensures Valid() && fresh(Repr-old(Repr))
+        ensures ghostseq == old(ghostseq[1..])
+        ensures x == old(ghostseq[0])
+}
+
+// Here is the definition of mutable links
+// that are used in circular chains.
+class Link<T>
+{
+    var head: T
+    var tail: Link<T>
+    
+    predicate ValidCycle( cycle: seq<Link<T>> )
+        reads this, cycle
+    {
+        |cycle| > 0 &&
+        this == cycle[|cycle|-1] &&
+        tail == cycle[0] &&
+        tail.ValidSequence(cycle) &&
+        forall p,q | 0 <= p < q < |cycle| ::
+            cycle[p] != cycle[q]
+    }
+    
+    predicate ValidSequence( sequence: seq<Link<T>> )
+        reads this, sequence
+    {
+        |sequence| > 0 &&
+        this == sequence[0] &&
+        forall i | 0 <= i < |sequence|-1 ::
+            sequence[i].tail == sequence[i+1]
+    }
+    
+    constructor( h: T, x: Link?<T>, ghost cycle: seq<Link<T>>, ghost values: seq<T> )
+        modifies if cycle != [] then {cycle[|cycle|-1]} else {}
+        requires (x == null && cycle == []) || (x != null && x.ValidCycle(cycle))
+        requires values == ValueSeq(cycle)
+        requires forall i | 0 <= i < |cycle| :: cycle[i].head == values[i]
+        ensures head == h
+        ensures tail == if x == null then this else cycle[0]
+        ensures fresh(this)
+        ensures forall i | 0 <= i < |cycle| :: cycle[i].head == values[i]
+        ensures forall i | 0 <= i < |cycle| :: cycle[i].head == old(cycle[i].head)
+        ensures forall z | z in cycle :: z.head == old(z.head)
+        ensures ValueSeq(cycle) == values
+        ensures ValidCycle(cycle+[this])
+        ensures ValueSeq(cycle+[this]) == values+[h]
+    {
+        head := h;
+        tail := this;
+        new;
+        if x != null
+        {
+            tail := x.tail;
+            x.tail := this;
+            HeadsEqual(cycle,values);
+            AppendLink(cycle,this);
+        }
+    }    
+}
+
+method RemoveFirst<T>   ( last: Link<T>
+                        , ghost cycle: seq<Link<T>>
+                        , ghost vals: seq<T>
+                        )
+        returns ( newlast: Link?<T>
+                , ghost newcycle: seq<Link<T>>
+                , ghost newvals: seq<T>
+                )
+    modifies last
+    requires last.ValidCycle(cycle)
+    requires ValueSeq(cycle) == vals
+    requires |vals| == |cycle|
+    requires |vals| > 0
+    ensures last.head == old(last.head)
+    ensures |vals| == 1 ==>
+                    newlast == null &&
+                    newcycle == [] &&
+                    newvals == []
+    ensures |vals| > 1 ==>
+                    newlast == last &&
+                    newcycle == cycle[1..] &&
+                    newlast.ValidCycle(cycle[1..]) &&
+                    newvals == vals[1..] &&
+                    ValueSeq(newcycle) == newvals
+{
+    if last.tail == last
+    {
+        newlast := null;
+        newcycle := [];
+        newvals := [];
+        return;
+    }
+    ValueSeqHeads(cycle,vals);
+    newlast := last;
+    newcycle := cycle[1..];
+    newvals := vals[1..];
+    newlast.tail := newlast.tail.tail;
+    HeadsEqual(cycle[1..],vals[1..]);
+}
+
+function ValueSeq<T>( x: seq<Link<T>> ): seq<T>
+    reads x
+    ensures |x| == |ValueSeq(x)|
+{
+    if x == [] then
+        []
+    else
+        [x[0].head]+ValueSeq(x[1..])
+}
+
+lemma ValueSeqHeads<T>( x: seq<Link<T>>, v: seq<T> )
+    requires v == ValueSeq(x)
+    ensures forall i | 0 <= i < |x| :: x[i].head == v[i]
+{
+    if |x| == 0 { return; }
+    ValueSeqHeads(x[1..],v[1..]);
+}
+
+lemma AppendLink<T>( x: seq<Link<T>>, z: Link<T> )
+    ensures ValueSeq(x+[z]) == ValueSeq(x)+[z.head]
+{
+    if x == [] { return; }
+    AppendLink(x[1..],z);
+    calc ==
+    {
+        x+[z];
+        (x[..1]+x[1..])+[z];
+        x[..1]+(x[1..]+[z]);
+    }
+}
+
+lemma HeadsEqual<T>( y: seq<Link<T>>, v: seq<T> )
+    requires |y| == |v|
+    requires forall i | 0 <= i < |y| :: v[i] == y[i].head
+    ensures v == ValueSeq(y)
+{
+    if |y| == 0 { return; }
+    HeadsEqual(y[1..],v[1..]);
+}
+
+method Factory() returns ( q: Queue<int> )
+    ensures fresh(q)
+    ensures fresh(q.Repr)
+    ensures q.Valid()
+    ensures q.IsEmpty()
+{
+    q := new QueueCycleChain<int>();
+}
+
+method Main()
+{
+    var q1 := Factory();
+    var q2 := Factory();
+    var q3 := Factory();
+    var q4 := Factory();
+    q1.Put(1);
+    q2.Put(1);
+    q3.Put(1);
+    q4.Put(1);
+    q1.Put(2);
+    assert q1.ghostseq == [1,2];
+    q2.Put(2);
+    q3.Put(2);
+    q4.Put(2);
+    var x;
+    x := q1.Get(); print x; print " ";
+    assert x == 1;
+    x := q1.Get(); print x; print " ";
+    assert x == 2;
+    assert q1.ghostseq == [];
+    x := q2.Get(); print x; print " ";
+    x := q2.Get(); print x; print " ";
+    x := q3.Get(); print x; print " ";
+    x := q3.Get(); print x; print " ";
+    x := q4.Get(); print x; print " ";
+    x := q4.Get(); print x; print " ";
+    assert q1.IsEmpty();
+    assert q2.IsEmpty();
+    assert q3.IsEmpty();
+    assert q4.IsEmpty();
+}
